@@ -10,11 +10,12 @@ import UIKit
 class MainTabController: UITabBarController {
     //MARK: - Properties
     //This button will show up on every tabBar
-    let actionButton : UIButton = {
+    lazy var actionButton : UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.backgroundColor = UIColor(named: "twtrColor")
+        button.backgroundColor = UIColor.twtrBlue
         button.setImage(UIImage(named: "new_tweet"), for: .normal)
+        button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         return button
     }()
     //MARK: - Lifecycle
@@ -31,7 +32,7 @@ class MainTabController: UITabBarController {
         view.addSubview(actionButton)
         actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 56, paddingRight: 16)
         actionButton.setDimensions(height: 56, width: 56)
-        actionButton.layer.cornerRadius = 28 //divide the height or width by 2 to get circular shap
+        actionButton.layer.cornerRadius = 28 //divide the height or width by 2 to get circular shape
     }
 
     func configureViewControllers(){
@@ -64,6 +65,10 @@ class MainTabController: UITabBarController {
         return nav
     }
     
+    //MARK: - Selectors
     
+    @objc func actionButtonTapped(sender: UIButton){
+        print(123)
+    }
 
 }
