@@ -9,7 +9,7 @@ import UIKit
 
 extension UIView{
     
-    func inputContainerView(withImage image: UIImage, textfield: UITextField? = nil) -> UIView{
+    func inputContainerView(withImage image: UIImage, textfield: UITextField) -> UIView{
         let view = UIView()
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         let imageView = UIImageView()
@@ -17,19 +17,17 @@ extension UIView{
         imageView.alpha = 0.87
         view.addSubview(imageView)
         
-        //imageview constraints will be different if the textField exists vs if the segmented control exits
-        if let textfield = textfield{
-            imageView.centerY(inView: view) //vertically centering it in the view
-            imageView.anchor(left: view.leftAnchor, paddingLeft: 8, height: 24, width: 24)
-            view.addSubview(textfield)
-            textfield.centerY(inView: view)
-            textfield.anchor(left: imageView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
-        }
+        imageView.centerY(inView: view) //vertically centering it in the view
+        imageView.anchor(left: view.leftAnchor, paddingLeft: 8, height: 24, width: 24)
+        view.addSubview(textfield)
+        textfield.centerY(inView: view)
+        textfield.anchor(left: imageView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
+        
         
         let divider = UIView()
         divider.backgroundColor = .white
         view.addSubview(divider)
-        divider.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8,paddingRight: 24, height: 0.75)
+        divider.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, height: 0.75)
         
         return view
     }
@@ -105,8 +103,6 @@ extension UITextField{
         tf.font = UIFont.systemFont(ofSize: 16)
         tf.textColor = .white
         tf.isSecureTextEntry = isSecureTextEntry
-        tf.keyboardAppearance = .dark //dark keybord to stick with the dark theme
-        //attributed placeholder with a custom color
         tf.attributedPlaceholder = NSAttributedString(string: placeholder,attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
         return tf
     }
