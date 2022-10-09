@@ -118,3 +118,15 @@ extension UILabel{
         return label
     }
 }
+
+extension UIButton{
+    func authButton(withTitle title: String) -> UIButton{
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.twtrBlue, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 5
+        return button
+    }
+}

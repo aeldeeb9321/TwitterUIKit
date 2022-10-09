@@ -44,21 +44,13 @@ class LoginController: UIViewController{
     }()
     
     private lazy var logInButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.twtrBlue, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = .white
+        let button = UIButton().authButton(withTitle: "Log In")
         button.addTarget(self, action: #selector(handleUserLogin), for: .touchUpInside)
-        button.layer.cornerRadius = 5
         return button
     }()
     
     private lazy var signUpButton: UIButton = {
-        let button = UIButton()
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)])
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)]))
-        button.setAttributedTitle(attributedTitle, for: .normal)
+        let button = Utilities().attributedButton("Don't have an account? ", "Sign Up") 
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
@@ -79,14 +71,13 @@ class LoginController: UIViewController{
         logoImageView.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor)
         logoImageView.setDimensions(height: 165, width: 165)
         
-        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView])
+        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, logInButton])
         stack.axis = .vertical
         stack.spacing = 20
+        stack.distribution = .fillEqually
+        
         view.addSubview(stack)
         stack.anchor(top: logoImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,paddingTop: 30, paddingLeft: 20, paddingRight: 32)
-        
-        view.addSubview(logInButton)
-        logInButton.anchor(top: stack.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 32, height: 50)
         
         view.addSubview(signUpButton)
         signUpButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, height: 32)
