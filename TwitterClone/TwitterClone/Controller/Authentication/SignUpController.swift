@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorage
+import FirebaseDatabase
 
 class SignUpController: UIViewController{
     //MARK: - Properties
     
     private let imagePicker = UIImagePickerController()
-    
+    //setting a class level variable of our profile image so we can access it in multiple different methods
+    private var profileImage: UIImage?
     private lazy var addPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus_photo") , for: .normal)
@@ -114,8 +118,21 @@ class SignUpController: UIViewController{
         present(imagePicker, animated: true)
     }
     @objc func handleUserSignUp(sender: UIButton){
-        //register user on our database then send them to homescreen
-        print("Debug: Sending to home screen")
+        guard let profileImage = profileImage else{
+            print("Please select a profile image")
+            return
+        }
+        
+        guard let email = emailTextField.text else{return}
+        guard let password = passwordTextField.text else{return}
+        guard let fullname = fullnameTextField.text else{return}
+        guard let username = usernameTextField.text else{return}
+        let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
+        AuthService.shared.registerUser(credentials: credentials) { Error, ref in
+            print("Debug: Sign up successful...")
+            print("Debug: Handle update user interface here...")
+        }
+        
     }
     
     @objc func handleGoToLogin(sender: UIButton){
@@ -128,6 +145,7 @@ class SignUpController: UIViewController{
 extension SignUpController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let profileImage = info[.editedImage] as? UIImage else{return}
+        self.profileImage = profileImage
         self.addPhotoButton.layer.cornerRadius = 128 / 2
         addPhotoButton.layer.masksToBounds = true
         addPhotoButton.imageView?.contentMode = .scaleAspectFill
