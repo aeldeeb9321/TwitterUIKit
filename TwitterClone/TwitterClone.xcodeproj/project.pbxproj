@@ -31,6 +31,7 @@
 		255CFDA728F268C500B3E6DA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 255CFDA628F268C500B3E6DA /* FirebaseStorage */; };
 		255CFDA928F3A75800B3E6DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDA828F3A75800B3E6DA /* Constants.swift */; };
 		255CFDAB28F3ADC700B3E6DA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDAA28F3ADC700B3E6DA /* AuthService.swift */; };
+		255CFDB428F6547000B3E6DA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDB328F6547000B3E6DA /* UserService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		255CFD9528F2583A00B3E6DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		255CFDA828F3A75800B3E6DA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		255CFDAA28F3ADC700B3E6DA /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		255CFDB328F6547000B3E6DA /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				255CFDAA28F3ADC700B3E6DA /* AuthService.swift */,
+				255CFDB328F6547000B3E6DA /* UserService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				255CFDB428F6547000B3E6DA /* UserService.swift in Sources */,
 				255CFD8928EFC9BE00B3E6DA /* NotificationController.swift in Sources */,
 				255CFD8B28EFC9DE00B3E6DA /* ConversationsController.swift in Sources */,
 				255CFD9428F24CB400B3E6DA /* Utilities.swift in Sources */,

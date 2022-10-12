@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 import FirebaseDatabase
+import FirebaseAuth
 
 class SignUpController: UIViewController{
     //MARK: - Properties
@@ -129,7 +130,7 @@ class SignUpController: UIViewController{
         guard let username = usernameTextField.text else{return}
         let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
         AuthService.shared.registerUser(credentials: credentials) { Error, ref in
-            print("Debug: Sign up successful...")
+            print("Debug: Sign up successful..")
             print("Debug: Handle update user interface here...")
         }
         

@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 import FirebaseDatabase
+import FirebaseAuth
 
 //making a structure like this is more professional than making a bunch of parameters in our AuthService method so its isnt messy
 struct AuthCredentials{
