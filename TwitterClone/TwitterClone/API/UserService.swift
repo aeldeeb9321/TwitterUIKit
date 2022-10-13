@@ -11,17 +11,14 @@ import FirebaseAuth
 struct UserService{
     static let shared = UserService()
     
-    func fetchUser(){
+    func fetchUser(completion: @escaping(User) -> Void){
         //if we recognize a user is logged in we get back info about that current user's id
         guard let uid = Auth.auth().currentUser?.uid else{return}
         REF_USERS.child(uid).observeSingleEvent(of: .value) { snapshot in
-            print("Debug: Snapshot is \(snapshot)")
             guard let dictionary = snapshot.value as? [String: AnyObject] else{return}
-            print("Debug: Dictionary is \(dictionary)")
-            
-            //parsing through our dictionary with the key "username" and getting the value
-            guard let username = dictionary["username"] as? String else{return}
-            print("Debug: Username is \(username)")
+            //Created a customer user object and used the data that we got from our database to construct that object
+            let user = User(uid: uid, dictionary: dictionary)
+            completion(user)
         }
     }
 }

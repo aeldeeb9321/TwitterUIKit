@@ -93,9 +93,8 @@ class LoginController: UIViewController{
                 print("Debug: Error logging in \(error.localizedDescription)")
                 return
             }
-            guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else{return}
             //getting access to the root vc
-            guard let tab = window.rootViewController as? MainTabController else{return}
+            guard let tab = self.presentingViewController as? MainTabController else{return}
             //since we have access to this tab controller we can call the authenticateuserConfigureUI so the user doesnt see a black screen when they log in
             tab.authenticateUserAndConfigureUI()
             //if log in is succesful we will dissmiss this loginController

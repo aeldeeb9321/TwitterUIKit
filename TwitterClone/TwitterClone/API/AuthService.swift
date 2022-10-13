@@ -36,20 +36,21 @@ struct AuthService{
         guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else{return}
         //now that we have the imageData we need to make a unique filename for our data
         let filename = NSUUID().uuidString
-        
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let error = error{
+                print("Debug: Error is \(error.localizedDescription)")
+                return
+            }
         //creating a storage reference
         let storageRef = STORAGE_PROFILE_IMAGES.child(filename) //(where we want to put our data)
         //upload that data into the database
         storageRef.putData(imageData) { meta, error in
+            
             //how to get download url
             storageRef.downloadURL { url, error in
                 guard let profileImageUrl = url?.absoluteString else{return}
                 
-                Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                    if let error = error{
-                        print("Debug: Error is \(error.localizedDescription)")
-                        return
-                    }
+                
                     guard let uid = result?.user.uid else{return}
                     //dictionary of values that we will upload to firebase when our user is successfully created
                     let values = ["email": email, "username": username, "fullname": fullname, "profileImageUrl": profileImageUrl]

@@ -32,6 +32,10 @@
 		255CFDA928F3A75800B3E6DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDA828F3A75800B3E6DA /* Constants.swift */; };
 		255CFDAB28F3ADC700B3E6DA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDAA28F3ADC700B3E6DA /* AuthService.swift */; };
 		255CFDB428F6547000B3E6DA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDB328F6547000B3E6DA /* UserService.swift */; };
+		255CFDDB28F76BD200B3E6DA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDDA28F76BD200B3E6DA /* User.swift */; };
+		255CFDDE28F7712300B3E6DA /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 255CFDDD28F7712300B3E6DA /* SDWebImage */; };
+		255CFDE028F7917F00B3E6DA /* ABTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDDF28F7917F00B3E6DA /* ABTest.swift */; };
+		255CFDE228F7A08B00B3E6DA /* UploadTweetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDE128F7A08B00B3E6DA /* UploadTweetController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +58,9 @@
 		255CFDA828F3A75800B3E6DA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		255CFDAA28F3ADC700B3E6DA /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		255CFDB328F6547000B3E6DA /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		255CFDDA28F76BD200B3E6DA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		255CFDDF28F7917F00B3E6DA /* ABTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABTest.swift; sourceTree = "<group>"; };
+		255CFDE128F7A08B00B3E6DA /* UploadTweetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTweetController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +74,7 @@
 				255CFDA528F268C500B3E6DA /* FirebaseRemoteConfigSwift in Frameworks */,
 				255CFD9F28F268C500B3E6DA /* FirebaseDatabase in Frameworks */,
 				255CFDA728F268C500B3E6DA /* FirebaseStorage in Frameworks */,
+				255CFDDE28F7712300B3E6DA /* SDWebImage in Frameworks */,
 				255CFDA328F268C500B3E6DA /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				255CFD9B28F268C500B3E6DA /* FirebaseAuth in Frameworks */,
 			);
@@ -128,6 +136,7 @@
 				255CFD8628EFC98E00B3E6DA /* ExploreController.swift */,
 				255CFD8828EFC9BE00B3E6DA /* NotificationController.swift */,
 				255CFD8A28EFC9DE00B3E6DA /* ConversationsController.swift */,
+				255CFDE128F7A08B00B3E6DA /* UploadTweetController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -149,6 +158,7 @@
 		255CFD8028EFBE0500B3E6DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				255CFDDA28F76BD200B3E6DA /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -159,6 +169,7 @@
 				255CFD8C28EFD48E00B3E6DA /* Extensions.swift */,
 				255CFD9328F24CB400B3E6DA /* Utilities.swift */,
 				255CFDA828F3A75800B3E6DA /* Constants.swift */,
+				255CFDDF28F7917F00B3E6DA /* ABTest.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -197,6 +208,7 @@
 				255CFDA228F268C500B3E6DA /* FirebaseInAppMessagingSwift-Beta */,
 				255CFDA428F268C500B3E6DA /* FirebaseRemoteConfigSwift */,
 				255CFDA628F268C500B3E6DA /* FirebaseStorage */,
+				255CFDDD28F7712300B3E6DA /* SDWebImage */,
 			);
 			productName = TwitterClone;
 			productReference = 255CFD6528EFBD2200B3E6DA /* TwitterClone.app */;
@@ -228,6 +240,7 @@
 			mainGroup = 255CFD5C28EFBD2200B3E6DA;
 			packageReferences = (
 				255CFD9728F268C500B3E6DA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				255CFDDC28F7712300B3E6DA /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 255CFD6628EFBD2200B3E6DA /* Products */;
 			projectDirPath = "";
@@ -260,11 +273,14 @@
 				255CFD8928EFC9BE00B3E6DA /* NotificationController.swift in Sources */,
 				255CFD8B28EFC9DE00B3E6DA /* ConversationsController.swift in Sources */,
 				255CFD9428F24CB400B3E6DA /* Utilities.swift in Sources */,
+				255CFDE228F7A08B00B3E6DA /* UploadTweetController.swift in Sources */,
 				255CFD6928EFBD2200B3E6DA /* AppDelegate.swift in Sources */,
 				255CFD8D28EFD48E00B3E6DA /* Extensions.swift in Sources */,
 				255CFD9028EFE93400B3E6DA /* LoginController.swift in Sources */,
 				255CFDAB28F3ADC700B3E6DA /* AuthService.swift in Sources */,
+				255CFDDB28F76BD200B3E6DA /* User.swift in Sources */,
 				255CFD9228EFE99C00B3E6DA /* SignUpController.swift in Sources */,
+				255CFDE028F7917F00B3E6DA /* ABTest.swift in Sources */,
 				255CFD8728EFC98E00B3E6DA /* ExploreController.swift in Sources */,
 				255CFD6B28EFBD2200B3E6DA /* SceneDelegate.swift in Sources */,
 				255CFD8328EFC7EA00B3E6DA /* MainTabController.swift in Sources */,
@@ -487,6 +503,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		255CFDDC28F7712300B3E6DA /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -529,6 +553,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 255CFD9728F268C500B3E6DA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		255CFDDD28F7712300B3E6DA /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 255CFDDC28F7712300B3E6DA /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,6 +7,8 @@
 
 import Firebase
 import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
 
 //creating shorthand global constants that allow us to access our database information
 let STORAGE_REF = Storage.storage().reference()

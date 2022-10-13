@@ -130,8 +130,13 @@ class SignUpController: UIViewController{
         guard let username = usernameTextField.text else{return}
         let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
         AuthService.shared.registerUser(credentials: credentials) { Error, ref in
-            print("Debug: Sign up successful..")
-            print("Debug: Handle update user interface here...")
+        
+            //getting access to the root vc
+            guard let tab = self.presentingViewController as? MainTabController else{return}
+            //since we have access to this tab controller we can call the authenticateuserConfigureUI so the user doesnt see a black screen when they log in
+            tab.authenticateUserAndConfigureUI()
+            //if log in is succesful we will dissmiss this loginController
+            self.dismiss(animated: true)
         }
         
     }

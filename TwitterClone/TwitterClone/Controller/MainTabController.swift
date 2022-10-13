@@ -8,14 +8,30 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-
+import FirebaseRemoteConfigSwift
 class MainTabController: UITabBarController {
     //MARK: - Properties
+    
+    var user: User?{
+        //Passing this user from the tabController to the feedController once our user gets set in fetchUser()
+        didSet{
+            guard let nav = viewControllers?[0] as? UINavigationController else{return}
+            guard let feed = nav.viewControllers.first as? FeedController else{return}
+            feed.user = user
+        }
+    }
     //This button will show up on every tabBar
     lazy var actionButton : UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.backgroundColor = UIColor.twtrBlue
+        var remoteColor: UIColor{
+            if AbTest.shared.remoteConfig.configValue(forKey: "backgroundColor", source: RemoteConfigSource.remote).stringValue == "treatment"{
+                return .orange
+            }else{
+                return .green
+            }
+        }
+        button.backgroundColor = remoteColor
         button.setImage(UIImage(named: "new_tweet"), for: .normal)
         button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         return button
@@ -24,6 +40,20 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .twtrBlue
+        AbTest.shared.remoteConfig.fetch { status, error in
+            if status == .success {
+                print("Config fetched!")
+                AbTest.shared.remoteConfig.activate { changed, error in
+                  // ...
+                }
+              } else {
+                print("Config not fetched")
+                print("Error: \(error?.localizedDescription ?? "No error available.")")
+              }
+            print("DebugRemote: \(AbTest.shared.remoteConfig.allKeys(from: .remote))")
+            
+        }
+        
         //logUserOut()
         authenticateUserAndConfigureUI()
 
@@ -32,7 +62,12 @@ class MainTabController: UITabBarController {
     //MARK: - API
     //Any controller that requires user information can be configured with that info from this mainTabBarcontroller
     func fetchUser(){
-        UserService.shared.fetchUser()
+        //thanks to the completion block we now have access to the user. Since its in a completion block our code doesnt get executed until our user is fetched. We stated in the completion block that we wanted User type in the completion, we have access to that user when we call this function following execution of completion
+        UserService.shared.fetchUser { user in
+            //setting the user
+            self.user = user
+            print("Main tab user is \(user.username)")
+        }
     }
     func authenticateUserAndConfigureUI(){
         if Auth.auth().currentUser == nil{
@@ -101,7 +136,9 @@ class MainTabController: UITabBarController {
     //MARK: - Selectors
     
     @objc func actionButtonTapped(sender: UIButton){
-        print(123)
+        let nav = UINavigationController(rootViewController: UploadTweetController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
 
 }
