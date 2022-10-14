@@ -104,7 +104,7 @@ class MainTabController: UITabBarController {
     }
 
     func configureViewControllers(){
-        let feedVC = FeedController()
+        let feedVC = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         let feedNC = templateNavigationController(image: "home_unselected", rootViewController: feedVC)
         
         let exploreVC = ExploreController()
