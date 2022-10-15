@@ -14,6 +14,7 @@ class CaptionTextView: UITextView{
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 16)
         label.text = "What's happening?"
+        label.numberOfLines = 0
         return label
     }()
     

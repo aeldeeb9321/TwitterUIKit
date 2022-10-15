@@ -129,4 +129,13 @@ extension UIButton{
         button.layer.cornerRadius = 5
         return button
     }
+    
+    func tweetButton(imageName: String, selector: Selector) -> UIButton{
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: imageName), for: .normal)
+        button.tintColor = .darkGray
+        button.setDimensions(height: 20, width: 20)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        return button
+    }
 }

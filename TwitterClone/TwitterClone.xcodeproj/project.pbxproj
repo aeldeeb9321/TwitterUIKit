@@ -39,6 +39,7 @@
 		255CFDE428F8E8FA00B3E6DA /* CaptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDE328F8E8FA00B3E6DA /* CaptionTextView.swift */; };
 		255CFDE628F8EDAA00B3E6DA /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDE528F8EDAA00B3E6DA /* TweetService.swift */; };
 		255CFDE828F8F48E00B3E6DA /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFDE728F8F48E00B3E6DA /* Tweet.swift */; };
+		25E557C728F8FB0500B00FE4 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E557C628F8FB0500B00FE4 /* TweetCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		255CFDE328F8E8FA00B3E6DA /* CaptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextView.swift; sourceTree = "<group>"; };
 		255CFDE528F8EDAA00B3E6DA /* TweetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		255CFDE728F8F48E00B3E6DA /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		25E557C628F8FB0500B00FE4 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				255CFDE328F8E8FA00B3E6DA /* CaptionTextView.swift */,
+				25E557C628F8FB0500B00FE4 /* TweetCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				255CFDDB28F76BD200B3E6DA /* User.swift in Sources */,
 				255CFD9228EFE99C00B3E6DA /* SignUpController.swift in Sources */,
 				255CFDE028F7917F00B3E6DA /* ABTest.swift in Sources */,
+				25E557C728F8FB0500B00FE4 /* TweetCell.swift in Sources */,
 				255CFD8728EFC98E00B3E6DA /* ExploreController.swift in Sources */,
 				255CFD6B28EFBD2200B3E6DA /* SceneDelegate.swift in Sources */,
 				255CFD8328EFC7EA00B3E6DA /* MainTabController.swift in Sources */,

@@ -16,6 +16,13 @@ class FeedController: UICollectionViewController{
             configureUserUI()
         }
     }
+    
+    private var tweets = [Tweet]() {
+        //we did this since it takes time for our api call to retrieve the tweets array, our collectionView numberOfItemsInSection returns tweets.count but it starts at 0 since it loads before the api call. So when our tweets array is set we will reload the data in our collectionView
+        didSet{
+            collectionView.reloadData()
+        }
+    }
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +35,17 @@ class FeedController: UICollectionViewController{
     func fetchTweets(){
         TweetService.shared.fetchTweets { tweets in
             print("Debug: Tweets are \(tweets)")
+            print("Debug number of tweets is \(tweets.count)")
+            //since we created a class level variable we can now recieve this fetched tweets array and store it in our class var
+            self.tweets = tweets
         }
     }
     
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        //collectionView.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellWithReuseIdentifier: <#T##String#>)
+        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.backgroundColor = .white
         let imageView = UIImageView(image: UIImage(named: "twitter_logo_blue"))
         imageView.contentMode = .scaleAspectFit
         imageView.setDimensions(height: 44, width: 44)
@@ -53,13 +64,21 @@ class FeedController: UICollectionViewController{
     }
 }
 
+//MARK: - UICollectionViewDelegate/DataSource
 extension FeedController{
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return tweets.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        cell.tweet = tweets[indexPath.row]
         return cell
+    }
+}
+//MARK: - UICollectionViewDelegateFlowLayout
+extension FeedController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 125)
     }
 }
