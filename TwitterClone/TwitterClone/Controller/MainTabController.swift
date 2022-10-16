@@ -62,11 +62,11 @@ class MainTabController: UITabBarController {
     //MARK: - API
     //Any controller that requires user information can be configured with that info from this mainTabBarcontroller
     func fetchUser(){
+        guard let uid = Auth.auth().currentUser?.uid else{return}
         //thanks to the completion block we now have access to the user. Since its in a completion block our code doesnt get executed until our user is fetched. We stated in the completion block that we wanted User type in the completion, we have access to that user when we call this function following execution of completion
-        UserService.shared.fetchUser { user in
+        UserService.shared.fetchUser(uid: uid) { user in
             //setting the user
             self.user = user
-            print("Main tab user is \(user.username)")
         }
     }
     func authenticateUserAndConfigureUI(){

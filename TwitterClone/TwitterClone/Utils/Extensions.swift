@@ -114,7 +114,6 @@ extension UILabel{
         label.text = withText
         label.font = font
         label.textColor = textColor
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
 }

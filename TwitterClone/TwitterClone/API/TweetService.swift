@@ -24,13 +24,17 @@ struct TweetService{
     func fetchTweets(completion: @escaping([Tweet]) -> Void){
         var tweets = [Tweet]()
         //.childAdded is a dataEventType which monitors for when a new child is added to a location. It has a looping functionality where it iterates through each one of the elements of a structure in the database and gives us back the information about that
-        REF_TWEETS.observe(.childAdded) { snapshot in
+        REF_TWEETS.observe(.childAdded) { snapshot  in
             guard let dictionary = snapshot.value as? [String: Any] else{return}
+            guard let uid = dictionary["uid"] as? String else{return}
             //the key for each snapshot which we need to construct our tweet
             let tweetId = snapshot.key
-            let tweet = Tweet(tweetID: tweetId, dictionary: dictionary)
-            tweets.append(tweet)
-            completion(tweets)
+            UserService.shared.fetchUser(uid: uid) { user in
+                let tweet = Tweet(user: user, tweetID: tweetId, dictionary: dictionary)
+                tweets.append(tweet)
+                completion(tweets)
+            }
+            
         }
     }
 }
