@@ -11,6 +11,7 @@ import SDWebImage
 private let reuseIdentifier = "TweetCell"
 class FeedController: UICollectionViewController{
     //MARK: - Properties
+    
     var user: User?{
         didSet{
             configureUserUI()
@@ -73,12 +74,24 @@ extension FeedController{
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
         cell.tweet = tweets[indexPath.row]
+        cell.delegate = self
         return cell
     }
+
 }
 //MARK: - UICollectionViewDelegateFlowLayout
 extension FeedController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 125)
     }
+}
+
+//MARK: - TweetCellDelegate
+extension FeedController: TweetCellDelegate{
+    func handleProfileImageTapped() {
+        let controller = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
 }

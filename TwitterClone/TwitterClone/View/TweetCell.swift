@@ -7,6 +7,10 @@
 
 import UIKit
 
+//delegating action from tweetcell to controller
+protocol TweetCellDelegate: AnyObject{
+    func handleProfileImageTapped()
+}
 class TweetCell: UICollectionViewCell{
     //MARK: - Properties
     
@@ -15,13 +19,22 @@ class TweetCell: UICollectionViewCell{
             configure()
         }
     }
-    private let profileImageView : UIImageView = {
+    
+    weak var delegate: TweetCellDelegate?
+    
+    private lazy var profileImageView : UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.setDimensions(height: 48, width: 48)
         iv.layer.cornerRadius = 24
         iv.layer.masksToBounds = true
         iv.backgroundColor = .twtrBlue
+        
+        //we are implementing an action handler to a view property through a gesture recognizer
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTapped))
+        iv.addGestureRecognizer(tap)
+        //by default this is set to false so you need to set it to true
+        iv.isUserInteractionEnabled = true
         return iv
     }()
     
@@ -101,6 +114,11 @@ class TweetCell: UICollectionViewCell{
     }
     
     @objc func handleShareTapped(){
+        
+    }
+    
+    @objc func handleProfileImageTapped(){
+        delegate?.handleProfileImageTapped()
         
     }
     //MARK: - Helpers
