@@ -114,6 +114,7 @@ extension UILabel{
         label.text = withText
         label.font = font
         label.textColor = textColor
+        label.adjustsFontSizeToFitWidth = true
         return label
     }
 }
