@@ -61,7 +61,6 @@ class ProfileHeader: UICollectionReusableView{
     private let fullnameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Flora"
         return label
     }()
     
@@ -69,11 +68,10 @@ class ProfileHeader: UICollectionReusableView{
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .lightGray
-        label.text = "@flowergirl"
         return label
     }()
     
-    private let bioLabel: UILabel = {
+    private var bioLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 3
@@ -174,6 +172,9 @@ class ProfileHeader: UICollectionReusableView{
         editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
         followingLabel.attributedText = viewModel.followingText
         followersLabel.attributedText = viewModel.followersText
+        
+        fullnameLabel.text = user.fullname
+        usernameLabel.text = viewModel.usernameText
     }
 }
 //MARK: - ProfileFilterViewDelegate
