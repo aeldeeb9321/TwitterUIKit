@@ -10,6 +10,7 @@
 		254B13B328FF8BF000DEF7F0 /* ProfileFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254B13B228FF8BF000DEF7F0 /* ProfileFilterView.swift */; };
 		254B13B528FF8D7E00DEF7F0 /* ProfileFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254B13B428FF8D7E00DEF7F0 /* ProfileFilterCell.swift */; };
 		254B13C02900E82100DEF7F0 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254B13BF2900E82100DEF7F0 /* ProfileHeaderViewModel.swift */; };
+		25509FF92908CE08003BAA77 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25509FF82908CE08003BAA77 /* UserCell.swift */; };
 		255CFD6928EFBD2200B3E6DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFD6828EFBD2200B3E6DA /* AppDelegate.swift */; };
 		255CFD6B28EFBD2200B3E6DA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CFD6A28EFBD2200B3E6DA /* SceneDelegate.swift */; };
 		255CFD7228EFBD2300B3E6DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255CFD7128EFBD2300B3E6DA /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		254B13B228FF8BF000DEF7F0 /* ProfileFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterView.swift; sourceTree = "<group>"; };
 		254B13B428FF8D7E00DEF7F0 /* ProfileFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterCell.swift; sourceTree = "<group>"; };
 		254B13BF2900E82100DEF7F0 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		25509FF82908CE08003BAA77 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		255CFD6528EFBD2200B3E6DA /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		255CFD6828EFBD2200B3E6DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		255CFD6A28EFBD2200B3E6DA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				25E5586728FD063300B00FE4 /* ProfileHeader.swift */,
 				254B13B228FF8BF000DEF7F0 /* ProfileFilterView.swift */,
 				254B13B428FF8D7E00DEF7F0 /* ProfileFilterCell.swift */,
+				25509FF82908CE08003BAA77 /* UserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				25E5583A28FB79AD00B00FE4 /* TweetViewModel.swift in Sources */,
 				255CFDDB28F76BD200B3E6DA /* User.swift in Sources */,
 				255CFD9228EFE99C00B3E6DA /* SignUpController.swift in Sources */,
+				25509FF92908CE08003BAA77 /* UserCell.swift in Sources */,
 				255CFDE028F7917F00B3E6DA /* ABTest.swift in Sources */,
 				25E557C728F8FB0500B00FE4 /* TweetCell.swift in Sources */,
 				255CFD8728EFC98E00B3E6DA /* ExploreController.swift in Sources */,
