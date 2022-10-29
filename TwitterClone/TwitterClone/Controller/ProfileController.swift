@@ -13,7 +13,7 @@ class ProfileController: UICollectionViewController{
     
     //MARK: - Properties
     //our profile is associated with a user
-    private let user: User
+    private var user: User
     
     private var tweets = [Tweet]() {
         didSet{
@@ -100,9 +100,21 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
 
 extension ProfileController: ProfileHeaderDelegate{
     func handleEditProfileFollow(_ header: ProfileHeader) {
-        UserService.shared.followUser(uid: user.uid) { ref, error in
-            
+        print("DEBUG: User is followed is \(user.isFollowed) prior to button tap")
+        // we need added a bool to our User Model so when we follow the user we set the property to true and when we unfollow its set to false
+        if user.isFollowed{
+            UserService.shared.unfollowUser(uid: user.uid) { err, ref in
+                self.user.isFollowed = false
+                print("DEBUG: User is followed is \(self.user.isFollowed) after to button tap")
+            }
+        }else{
+            UserService.shared.followUser(uid: user.uid) { ref, error in
+                self.user.isFollowed = true
+                print("DEBUG: User is followed is \(self.user.isFollowed) after to button tap")
+            }
         }
+        
+        
     }
     
     func handleDissmisal() {

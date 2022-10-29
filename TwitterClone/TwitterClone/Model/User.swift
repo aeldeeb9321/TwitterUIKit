@@ -15,7 +15,7 @@ struct User{
     let username: String
     var profileImageUrl: URL?
     let uid: String
-    
+    var isFollowed = false
     //property that will determine whether or not that user is the current user, which we will user in our ProfileHeaderViewModel
     var isCurrentUser: Bool {
         return Auth.auth().currentUser?.uid == uid
