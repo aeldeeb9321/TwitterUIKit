@@ -9,10 +9,10 @@ import UIKit
 import SDWebImage
 
 private let reuseIdentifier = "TweetCell"
-class FeedController: UICollectionViewController{
+class FeedController: UICollectionViewController {
     //MARK: - Properties
     
-    var user: User?{
+    var user: User? {
         didSet{
             configureUserUI()
         }
@@ -20,7 +20,7 @@ class FeedController: UICollectionViewController{
     
     private var tweets = [Tweet]() {
         //we did this since it takes time for our api call to retrieve the tweets array, our collectionView numberOfItemsInSection returns tweets.count but it starts at 0 since it loads before the api call. So when our tweets array is set we will reload the data in our collectionView
-        didSet{
+        didSet {
             collectionView.reloadData()
         }
     }
@@ -38,7 +38,7 @@ class FeedController: UICollectionViewController{
     }
     //MARK: - API
     
-    func fetchTweets(){
+    func fetchTweets() {
         TweetService.shared.fetchTweets { tweets in
             print("Debug: Tweets are \(tweets)")
             print("Debug number of tweets is \(tweets.count)")
@@ -48,7 +48,7 @@ class FeedController: UICollectionViewController{
     }
     
     //MARK: - Helpers
-    func configureUI(){
+    func configureUI() {
         view.backgroundColor = .white
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .white
@@ -57,7 +57,7 @@ class FeedController: UICollectionViewController{
         imageView.setDimensions(height: 44, width: 44)
         navigationItem.titleView = imageView
     }
-    func configureUserUI(){
+    func configureUserUI() {
         guard let user = user else{return}
         let profileImageView = UIImageView()
         profileImageView.setDimensions(height: 32, width: 32)
@@ -71,7 +71,7 @@ class FeedController: UICollectionViewController{
 }
 
 //MARK: - UICollectionViewDelegate/DataSource
-extension FeedController{
+extension FeedController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tweets.count
     }
@@ -85,21 +85,18 @@ extension FeedController{
 
 }
 //MARK: - UICollectionViewDelegateFlowLayout
-extension FeedController: UICollectionViewDelegateFlowLayout{
+extension FeedController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 125)
     }
 }
 
 //MARK: - TweetCellDelegate
-extension FeedController: TweetCellDelegate{
+extension FeedController: TweetCellDelegate {
     func handleProfileImageTapped(_ cell: TweetCell) {
         //this will initialize our profile controller with the user that is associated with that tweet
         guard let user = cell.tweet?.user else{return}
         let controller = ProfileController(user: user)
         navigationController?.pushViewController(controller, animated: true)
     }
-
-    
-    
 }

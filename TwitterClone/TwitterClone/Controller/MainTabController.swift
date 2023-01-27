@@ -12,7 +12,7 @@ import FirebaseRemoteConfigSwift
 class MainTabController: UITabBarController {
     //MARK: - Properties
     
-    var user: User?{
+    var user: User? {
         //Passing this user from the tabController to the feedController once our user gets set in fetchUser()
         didSet{
             guard let nav = viewControllers?[0] as? UINavigationController else{return}
@@ -61,7 +61,7 @@ class MainTabController: UITabBarController {
     
     //MARK: - API
     //Any controller that requires user information can be configured with that info from this mainTabBarcontroller
-    func fetchUser(){
+    func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else{return}
         //thanks to the completion block we now have access to the user. Since its in a completion block our code doesnt get executed until our user is fetched. We stated in the completion block that we wanted User type in the completion, we have access to that user when we call this function following execution of completion
         UserService.shared.fetchUser(uid: uid) { user in
@@ -69,7 +69,7 @@ class MainTabController: UITabBarController {
             self.user = user
         }
     }
-    func authenticateUserAndConfigureUI(){
+    func authenticateUserAndConfigureUI() {
         if Auth.auth().currentUser == nil{
             //present them to the login Controller
             DispatchQueue.main.async {
@@ -77,7 +77,7 @@ class MainTabController: UITabBarController {
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true)
             }
-        }else{
+        }else {
             configureViewControllers()
             setupTabBar()
             configureUI()
@@ -85,7 +85,7 @@ class MainTabController: UITabBarController {
         }
     }
     
-    func logUserOut(){
+    func logUserOut() {
         do{
             try Auth.auth().signOut()
             print("Debug: Did log user out")
@@ -96,14 +96,14 @@ class MainTabController: UITabBarController {
     
     //MARK: - Helpers
     
-    func configureUI(){
+    func configureUI() {
         view.addSubview(actionButton)
         actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 56, paddingRight: 16)
         actionButton.setDimensions(height: 56, width: 56)
         actionButton.layer.cornerRadius = 28 //divide the height or width by 2 to get circular shape
     }
 
-    func configureViewControllers(){
+    func configureViewControllers() {
         let feedVC = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         let feedNC = templateNavigationController(image: "home_unselected", rootViewController: feedVC)
         
@@ -126,7 +126,7 @@ class MainTabController: UITabBarController {
         //tabBar.isTranslucent = false
     }
     
-    func templateNavigationController(image: String, rootViewController: UIViewController) -> UINavigationController{
+    func templateNavigationController(image: String, rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = UIImage(named: image)
         nav.navigationBar.barTintColor = .white
@@ -135,7 +135,7 @@ class MainTabController: UITabBarController {
     
     //MARK: - Selectors
     
-    @objc func actionButtonTapped(sender: UIButton){
+    @objc func actionButtonTapped(sender: UIButton) {
         guard let user = user else{return}
         let nav = UINavigationController(rootViewController: UploadTweetController(user: user))
         nav.modalPresentationStyle = .fullScreen

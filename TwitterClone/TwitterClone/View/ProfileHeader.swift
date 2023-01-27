@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol ProfileHeaderDelegate: AnyObject{
+protocol ProfileHeaderDelegate: AnyObject {
     func handleDissmisal()
     func handleEditProfileFollow(_ header: ProfileHeader)
 }
-class ProfileHeader: UICollectionReusableView{
+class ProfileHeader: UICollectionReusableView {
     
     //MARK: - Properties
     weak var delegate: ProfileHeaderDelegate?
-    var user: User?{
-        didSet{
+    var user: User? {
+        didSet {
             configure()
         }
     }
@@ -149,24 +149,24 @@ class ProfileHeader: UICollectionReusableView{
     
     
     //MARK: - Selectors
-    @objc func handleDismissal(){
+    @objc func handleDismissal() {
         delegate?.handleDissmisal()
     }
     
-    @objc func handleEditProfileFollow(){
+    @objc func handleEditProfileFollow() {
         delegate?.handleEditProfileFollow(self)
     }
     
-    @objc func handleFollowersTapped(){
+    @objc func handleFollowersTapped() {
         
     }
     
-    @objc func handleFollowingTapped(){
+    @objc func handleFollowingTapped() {
         
     }
     
     //MARK: - Helpers
-    func configure(){
+    func configure() {
         guard let user = user else{return}
         let viewModel = ProfileHeaderViewModel(user: user)
         profileImageView.sd_setImage(with: user.profileImageUrl)
@@ -179,7 +179,7 @@ class ProfileHeader: UICollectionReusableView{
     }
 }
 //MARK: - ProfileFilterViewDelegate
-extension ProfileHeader: ProfileFilterViewDelegate{
+extension ProfileHeader: ProfileFilterViewDelegate {
     func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
         //getting the cell for the corresponding indexPath
         guard let cell = view.collectionView.cellForItem(at: indexPath) as? ProfileFilterCell else{return}

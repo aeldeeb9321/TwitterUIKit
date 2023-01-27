@@ -11,6 +11,7 @@ class UploadTweetController: UIViewController{
     
     //MARK: - Properties
     private let user: User
+    
     private lazy var actionButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .twtrBlue
@@ -39,7 +40,7 @@ class UploadTweetController: UIViewController{
     
     //MARK: - Lifecycle
     //we are initializing user and it is being passed in from our main tab controller, that way we can load the user image without having to do an unnecessary api call. We know this controller needs info on the user which is why we initialized it.
-    init(user: User){
+    init(user: User) {
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,17 +48,17 @@ class UploadTweetController: UIViewController{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
     //MARK: - Selectors
-    @objc func handleCancel(){
+    @objc func handleCancel() {
         dismiss(animated: true)
     }
     
-    @objc func handleUploadTweet(){
+    @objc func handleUploadTweet() {
         guard let caption = captionTextView.text else{return}
         TweetService.shared.uploadTweet(caption: caption) { error, ref in
             if let error = error{
@@ -70,7 +71,7 @@ class UploadTweetController: UIViewController{
     //MARK: - API
     
     //MARK: - Helpers
-    func configureUI(){
+    func configureUI() {
         view.backgroundColor = .white
         configureNavBar()
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
@@ -84,7 +85,7 @@ class UploadTweetController: UIViewController{
         
     }
     
-    func configureNavBar(){
+    func configureNavBar() {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))

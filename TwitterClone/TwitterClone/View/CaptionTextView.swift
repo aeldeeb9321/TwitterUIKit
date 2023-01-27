@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CaptionTextView: UITextView{
+class CaptionTextView: UITextView {
     //MARK: - Properties
     let placeHolderLabel: UILabel = {
         let label = UILabel()
@@ -38,7 +38,7 @@ class CaptionTextView: UITextView{
     
     //MARK: - Selectors
     
-    @objc func handleTextInputChange(){
+    @objc func handleTextInputChange() {
         //This makes it so our placeholder disappears when we start typing, and comes back when we deleted what we typed. You can type this with conditions but this is cleaner
         placeHolderLabel.isHidden = !text.isEmpty
     }

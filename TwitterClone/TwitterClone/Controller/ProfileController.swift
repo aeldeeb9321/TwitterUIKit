@@ -9,7 +9,7 @@ import UIKit
 
 private let reuseIdentifier = "TweetCell"
 private let headerIdentifier = "ProfileHeader"
-class ProfileController: UICollectionViewController{
+class ProfileController: UICollectionViewController {
     
     //MARK: - Properties
     //our profile is associated with a user
@@ -45,14 +45,14 @@ class ProfileController: UICollectionViewController{
     }
     
     //MARK: - API
-    func fetchTweets(){
+    func fetchTweets() {
         TweetService.shared.fetchTweets(forUser: user) { tweets in
             self.tweets = tweets
         }
     }
     //MARK: - Helpers
     
-    func configureCollectionView(){
+    func configureCollectionView() {
         collectionView.backgroundColor = .white
         //The behavior for determining the adjusted content offsets for the header
         collectionView.contentInsetAdjustmentBehavior = .never
@@ -66,7 +66,7 @@ class ProfileController: UICollectionViewController{
 }
 
 //MARK: - UICollectionViewDataSource
-extension ProfileController{
+extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tweets.count
     }
@@ -78,7 +78,7 @@ extension ProfileController{
     }
 }
 
-extension ProfileController{
+extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
         header.user = user
@@ -88,7 +88,7 @@ extension ProfileController{
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
-extension ProfileController: UICollectionViewDelegateFlowLayout{
+extension ProfileController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 350)

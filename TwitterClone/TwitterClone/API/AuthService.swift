@@ -12,7 +12,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 //making a structure like this is more professional than making a bunch of parameters in our AuthService method so its isnt messy
-struct AuthCredentials{
+struct AuthCredentials {
     let email: String
     let password: String
     let fullname: String
@@ -20,13 +20,14 @@ struct AuthCredentials{
     let profileImage: UIImage
 }
 
-struct AuthService{
+struct AuthService {
     static let shared = AuthService()
     
-    func logUserIn(withEmail email: String, password: String, completion:((AuthDataResult?, Error?) -> Void)? ){
+    func logUserIn(withEmail email: String, password: String, completion:((AuthDataResult?, Error?) -> Void)? ) {
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)
     }
-    func registerUser(credentials: AuthCredentials, completion:  @escaping(Error?, DatabaseReference) -> Void){
+    
+    func registerUser(credentials: AuthCredentials, completion:  @escaping(Error?, DatabaseReference) -> Void) {
         let email = credentials.email
         let password = credentials.password
         let fullname = credentials.fullname

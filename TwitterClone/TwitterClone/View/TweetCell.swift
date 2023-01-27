@@ -8,10 +8,10 @@
 import UIKit
 
 //delegating action from tweetcell to controller
-protocol TweetCellDelegate: AnyObject{
+protocol TweetCellDelegate: AnyObject {
     func handleProfileImageTapped(_ cell: TweetCell)
 }
-class TweetCell: UICollectionViewCell{
+class TweetCell: UICollectionViewCell {
     //MARK: - Properties
     
     var tweet: Tweet? {
@@ -101,29 +101,29 @@ class TweetCell: UICollectionViewCell{
     }
     
     //MARK: - Selectors
-    @objc func handleCommentTapped(){
+    @objc func handleCommentTapped() {
         
     }
     
-    @objc func handleRetweetTappped(){
+    @objc func handleRetweetTappped() {
         
     }
     
-    @objc func handleLikeTapped(){
+    @objc func handleLikeTapped() {
         
     }
     
-    @objc func handleShareTapped(){
+    @objc func handleShareTapped() {
         
     }
     
-    @objc func handleProfileImageTapped(){
+    @objc func handleProfileImageTapped() {
         delegate?.handleProfileImageTapped(self)
         
     }
     //MARK: - Helpers
     
-    func configure(){
+    func configure() {
         guard let tweet = tweet else{return}
         let viewModel = TweetViewModel(tweet: tweet)
         captionLabel.text = tweet.caption

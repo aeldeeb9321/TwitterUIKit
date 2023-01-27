@@ -11,7 +11,7 @@ import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
 
-class SignUpController: UIViewController{
+class SignUpController: UIViewController {
     //MARK: - Properties
     
     private let imagePicker = UIImagePickerController()
@@ -89,7 +89,7 @@ class SignUpController: UIViewController{
     }
     
     //MARK: - Helpers
-    func configureUI(){
+    func configureUI() {
         view.backgroundColor = .twtrBlue
         
         imagePicker.delegate = self
@@ -115,7 +115,7 @@ class SignUpController: UIViewController{
     
     //MARK: - Selectors
     
-    @objc func handleAddProfilePic(sender: UIButton){
+    @objc func handleAddProfilePic(sender: UIButton) {
         present(imagePicker, animated: true)
     }
     @objc func handleUserSignUp(sender: UIButton){
@@ -141,14 +141,14 @@ class SignUpController: UIViewController{
         
     }
     
-    @objc func handleGoToLogin(sender: UIButton){
+    @objc func handleGoToLogin(sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
 }
 
 //MARK: - UIImagePickerControllerDelegate/UINavigationControllerDelegate
 
-extension SignUpController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension SignUpController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let profileImage = info[.editedImage] as? UIImage else{return}
         self.profileImage = profileImage
@@ -165,6 +165,6 @@ extension SignUpController: UIImagePickerControllerDelegate, UINavigationControl
 }
 
 //MARK: - UITextFieldDelegate
-extension SignUpController: UITextFieldDelegate{
+extension SignUpController: UITextFieldDelegate {
     
 }

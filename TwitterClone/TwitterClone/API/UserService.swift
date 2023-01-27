@@ -12,7 +12,7 @@ typealias DatabaseCompletion = ((Error?, DatabaseReference) -> Void)
 struct UserService{
     static let shared = UserService()
     
-    func fetchUser(uid: String,completion: @escaping(User) -> Void){
+    func fetchUser(uid: String,completion: @escaping(User) -> Void) {
 //        //if we recognize a user is logged in we get back info about that current user's id
 //        guard let uid = Auth.auth().currentUser?.uid else{return}
         REF_USERS.child(uid).observeSingleEvent(of: .value) { snapshot in
@@ -23,7 +23,7 @@ struct UserService{
         }
     }
     
-    func fetchUsers (completion: @escaping([User]) -> Void){
+    func fetchUsers (completion: @escaping([User]) -> Void) {
         var users = [User]()
         REF_USERS.observe(.childAdded) { snapshot in
             let uid = snapshot.key
@@ -34,7 +34,7 @@ struct UserService{
         }
     }
     
-    func followUser(uid: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+    func followUser(uid: String, completion: @escaping(Error?, DatabaseReference) -> Void) {
         guard let currentUid = Auth.auth().currentUser?.uid else{return}
         //update child values
         REF_USER_FOLLOWING.child(currentUid).updateChildValues([uid : 1]) { error, ref in
@@ -45,7 +45,7 @@ struct UserService{
 //        print("DEBUG: Uid \(uid) gained \(currentUid) as a follower")
     }
     
-    func unfollowUser(uid: String, completion: @escaping(DatabaseCompletion)){
+    func unfollowUser(uid: String, completion: @escaping(DatabaseCompletion)) {
         guard let currentUid = Auth.auth().currentUser?.uid else{return}
         REF_USER_FOLLOWING.child(currentUid).child(uid).removeValue { err, ref in
             REF_USER_FOLLOWERS.child(uid).child(currentUid).removeValue(completionBlock: completion)

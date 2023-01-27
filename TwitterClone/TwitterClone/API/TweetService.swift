@@ -9,10 +9,10 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-struct TweetService{
+struct TweetService {
     static let shared = TweetService()
     
-    func uploadTweet(caption: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+    func uploadTweet(caption: String, completion: @escaping(Error?, DatabaseReference) -> Void) {
         //We need the uid since we need to know who made a tweet
         guard let uid = Auth.auth().currentUser?.uid else{return}
         //values that we will upload to our database
@@ -27,7 +27,7 @@ struct TweetService{
         }
     }
     //fetching the tweets from our database, used the info we got back from the database to construct our custom tweet object by passing in the tweetid and dictionary. Within that dictionary we look for the values we need to populate the properties in our Tweet structure.
-    func fetchTweets(completion: @escaping([Tweet]) -> Void){
+    func fetchTweets(completion: @escaping([Tweet]) -> Void) {
         var tweets = [Tweet]()
         //.childAdded is a dataEventType which monitors for when a new child is added to a location. It has a looping functionality where it iterates through each one of the elements of a structure in the database and gives us back the information about that
         REF_TWEETS.observe(.childAdded) { snapshot  in
@@ -44,7 +44,7 @@ struct TweetService{
         }
     }
     
-    func fetchTweets(forUser user: User, completion: @escaping([Tweet]) -> Void){
+    func fetchTweets(forUser user: User, completion: @escaping([Tweet]) -> Void) {
         var tweets = [Tweet]()
         //we want this function to give us back an array of tweets which we will use to populate the user profile controller with that array of tweets (our datasource for the controller)
         REF_USER_TWEETS.child(user.uid).observe(.childAdded) { snapshot in

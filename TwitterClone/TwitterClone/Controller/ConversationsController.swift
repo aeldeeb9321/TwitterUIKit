@@ -17,7 +17,7 @@ class ConversationsController: UIViewController{
     }
     
     //MARK: - Helpers
-    func configureUI(){
+    func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "Messages"
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileFilterCell: UICollectionViewCell{
+class ProfileFilterCell: UICollectionViewCell {
     //MARK: - Properties
     var option: ProfileFilterOptions! {
         didSet{
@@ -19,9 +19,9 @@ class ProfileFilterCell: UICollectionViewCell{
         return label
     }()
     
-    override var isSelected: Bool{
+    override var isSelected: Bool {
         //if the cell if selected we want to make the font bigger and change the color
-        didSet{
+        didSet {
             titleLabel.font = isSelected ? UIFont.boldSystemFont(ofSize: 16): UIFont.systemFont(ofSize: 14)
             titleLabel.textColor = isSelected ? .twtrBlue: .lightGray
         }

@@ -8,10 +8,10 @@
 import UIKit
 private let reuseIdentifier = "ProfileFilterCell"
 
-protocol ProfileFilterViewDelegate: AnyObject{
+protocol ProfileFilterViewDelegate: AnyObject {
     func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath)
 }
-class ProfileFilterView: UIView{
+class ProfileFilterView: UIView {
     
     //MARK: - Properties
     weak var delegate: ProfileFilterViewDelegate?
@@ -45,7 +45,7 @@ class ProfileFilterView: UIView{
     }
 }
 //MARK: - UICollectionViewDataSource
-extension ProfileFilterView: UICollectionViewDataSource{
+extension ProfileFilterView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileFilterCell
         //construct the filter
@@ -60,7 +60,7 @@ extension ProfileFilterView: UICollectionViewDataSource{
     
 }
 //MARK: - UICollectionViewDelegateFlowLayout (gets called everytime you select an item)
-extension ProfileFilterView: UICollectionViewDelegateFlowLayout{
+extension ProfileFilterView: UICollectionViewDelegateFlowLayout {
     //setting up the size of the cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellCount = CGFloat(ProfileFilterOptions.allCases.count)

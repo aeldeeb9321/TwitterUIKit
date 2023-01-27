@@ -9,11 +9,11 @@ import Foundation
 import Firebase
 import FirebaseRemoteConfigSwift
 
-class AbTest{
+class AbTest {
     static let shared = AbTest()
     var remoteConfig: RemoteConfig
     
-    init(){
+    init() {
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0

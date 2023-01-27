@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserCell: UITableViewCell{
+class UserCell: UITableViewCell {
     //MARK: - Properties
     
     var user: User? {
@@ -58,8 +58,8 @@ class UserCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(){
-        guard let user = user else{
+    func configure() {
+        guard let user = user else {
             return
         }
         

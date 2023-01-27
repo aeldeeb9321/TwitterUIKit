@@ -7,22 +7,22 @@
 
 import UIKit
 private let reuseIdentifier = "reuseIdentifier"
-class ExploreController: UITableViewController{
+class ExploreController: UITableViewController {
     //MARK: - Properties
-    private var users = [User](){
-        didSet{
+    private var users = [User]() {
+        didSet {
             tableView.reloadData()
         }
     }
     
     private var filteredUsers = [User]() {
-        didSet{
+        didSet {
             tableView.reloadData()
         }
     }
     
     //help us determine whether the user is typing something or not
-    private var inSearchMode: Bool{
+    private var inSearchMode: Bool {
         return searchController.isActive && !searchController.searchBar.text!.isEmpty
     }
     private let searchController = UISearchController(searchResultsController: nil)
@@ -42,13 +42,13 @@ class ExploreController: UITableViewController{
     }
     
     //MARK: - API
-    private func fetchUsers(){
+    private func fetchUsers() {
         UserService.shared.fetchUsers { users in
             self.users = users
         }
     }
     //MARK: - Helpers
-    private func configureUI(){
+    private func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "Explore"
         tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -57,7 +57,7 @@ class ExploreController: UITableViewController{
         tableView.separatorColor = .none
     }
     
-    private func configureSearchController(){
+    private func configureSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
@@ -67,7 +67,7 @@ class ExploreController: UITableViewController{
     }
 }
 
-extension ExploreController{
+extension ExploreController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return inSearchMode ? filteredUsers.count: users.count
     }
@@ -86,7 +86,7 @@ extension ExploreController{
     }
 }
 
-extension ExploreController: UISearchResultsUpdating{
+extension ExploreController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         //we will use this to update controller with filter text user types in, called every time you enter or delete something from search bar
         guard let searchText = searchController.searchBar.text?.lowercased() else{return}
