@@ -9,17 +9,19 @@ import Foundation
 import Firebase
 import FirebaseAuth
 //Model for our User object
-struct User{
+struct User {
     let fullname: String
     let email: String
     let username: String
     var profileImageUrl: URL?
     let uid: String
     var isFollowed = false
-    //property that will determine whether or not that user is the current user, which we will user in our ProfileHeaderViewModel
+    var stats: UserInfoStats?
+
     var isCurrentUser: Bool {
         return Auth.auth().currentUser?.uid == uid
     }
+    
     init(uid: String, dictionary: [String: AnyObject]) {
         self.uid = uid
         self.fullname = dictionary["fullname"] as? String ?? ""
@@ -30,4 +32,9 @@ struct User{
             self.profileImageUrl = url
         }
     }
+}
+
+struct UserInfoStats {
+    var followers: Int
+    var following: Int
 }
