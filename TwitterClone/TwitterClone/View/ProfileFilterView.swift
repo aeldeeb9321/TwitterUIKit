@@ -17,7 +17,7 @@ class ProfileFilterView: UIView {
     weak var delegate: ProfileFilterViewDelegate?
     
     //This collectionView we are using within this view
-    lazy var collectionView: UICollectionView = {
+     lazy var collectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .white

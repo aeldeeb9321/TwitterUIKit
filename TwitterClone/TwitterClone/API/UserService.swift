@@ -8,7 +8,9 @@
 import Firebase
 import FirebaseAuth
 
+//THis typealias will help us avoid keep rewriting the escaping arguments
 typealias DatabaseCompletion = ((Error?, DatabaseReference) -> Void)
+
 struct UserService{
     static let shared = UserService()
     
@@ -49,6 +51,17 @@ struct UserService{
         guard let currentUid = Auth.auth().currentUser?.uid else{return}
         REF_USER_FOLLOWING.child(currentUid).child(uid).removeValue { err, ref in
             REF_USER_FOLLOWERS.child(uid).child(currentUid).removeValue(completionBlock: completion)
+        }
+    }
+    
+    func checkIfUserIsFollowed(uid: String, completion: @escaping(Bool) -> ()) {
+        //we are just going to have a completion of a boolean variable since all we need to do is check if a value exists in the structure. So to check and see if we are following somone we go into the user-following structure and see if the uid exists. If it does then we completed this with true, if it doesnt we complete it with false. THen we will update our ui based on the value of the completion block.
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        REF_USER_FOLLOWING.child(currentUid).child(uid).observeSingleEvent(of: .value) { snapshot in
+            //snapshot.exists will tell us whether or not that child we are looking for exists
+            print("DEBUG: User is followed is \(snapshot.exists())")
+            completion(snapshot.exists())
         }
     }
 }

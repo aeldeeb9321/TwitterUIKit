@@ -13,7 +13,11 @@ class ProfileController: UICollectionViewController {
     
     //MARK: - Properties
     //our profile is associated with a user
-    private var user: User
+    private var user: User {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     private var tweets = [Tweet]() {
         didSet{
@@ -35,6 +39,7 @@ class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         fetchTweets()
+        checkIfUserIsFollowed()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,14 +50,21 @@ class ProfileController: UICollectionViewController {
     }
     
     //MARK: - API
-    func fetchTweets() {
+    private func fetchTweets() {
         TweetService.shared.fetchTweets(forUser: user) { tweets in
             self.tweets = tweets
         }
     }
+    
+    private func checkIfUserIsFollowed() {
+        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
+            self.user.isFollowed = isFollowed
+            self.collectionView.reloadData()
+        }
+    }
     //MARK: - Helpers
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         collectionView.backgroundColor = .white
         //The behavior for determining the adjusted content offsets for the header
         collectionView.contentInsetAdjustmentBehavior = .never
@@ -102,19 +114,20 @@ extension ProfileController: ProfileHeaderDelegate{
     func handleEditProfileFollow(_ header: ProfileHeader) {
         print("DEBUG: User is followed is \(user.isFollowed) prior to button tap")
         // we need added a bool to our User Model so when we follow the user we set the property to true and when we unfollow its set to false
-        if user.isFollowed{
-            UserService.shared.unfollowUser(uid: user.uid) { err, ref in
-                self.user.isFollowed = false
-                print("DEBUG: User is followed is \(self.user.isFollowed) after to button tap")
-            }
-        }else{
-            UserService.shared.followUser(uid: user.uid) { ref, error in
-                self.user.isFollowed = true
-                print("DEBUG: User is followed is \(self.user.isFollowed) after to button tap")
-            }
+        if user.isCurrentUser {
+            print("DEBUG: Show edit profile Controller..")
+            return
         }
         
-        
+        if user.isFollowed {
+            UserService.shared.unfollowUser(uid: user.uid) { err, ref in
+                self.user.isFollowed = false
+            }
+        } else {
+            UserService.shared.followUser(uid: user.uid) { ref, error in
+                self.user.isFollowed = true
+            }
+        }
     }
     
     func handleDissmisal() {

@@ -54,11 +54,11 @@ class UploadTweetController: UIViewController{
     }
     
     //MARK: - Selectors
-    @objc func handleCancel() {
+    @objc private func handleCancel() {
         dismiss(animated: true)
     }
     
-    @objc func handleUploadTweet() {
+    @objc private func handleUploadTweet() {
         guard let caption = captionTextView.text else{return}
         TweetService.shared.uploadTweet(caption: caption) { error, ref in
             if let error = error{
@@ -71,7 +71,7 @@ class UploadTweetController: UIViewController{
     //MARK: - API
     
     //MARK: - Helpers
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         configureNavBar()
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
@@ -85,7 +85,7 @@ class UploadTweetController: UIViewController{
         
     }
     
-    func configureNavBar() {
+    private func configureNavBar() {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))

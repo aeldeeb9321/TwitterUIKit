@@ -17,7 +17,7 @@ class NotificationController: UIViewController {
     }
     
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         navigationItem.title = "Notifications"
     }

@@ -38,7 +38,7 @@ class FeedController: UICollectionViewController {
     }
     //MARK: - API
     
-    func fetchTweets() {
+    private func fetchTweets() {
         TweetService.shared.fetchTweets { tweets in
             print("Debug: Tweets are \(tweets)")
             print("Debug number of tweets is \(tweets.count)")
@@ -48,7 +48,7 @@ class FeedController: UICollectionViewController {
     }
     
     //MARK: - Helpers
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .white
@@ -57,7 +57,7 @@ class FeedController: UICollectionViewController {
         imageView.setDimensions(height: 44, width: 44)
         navigationItem.titleView = imageView
     }
-    func configureUserUI() {
+    private func configureUserUI() {
         guard let user = user else{return}
         let profileImageView = UIImageView()
         profileImageView.setDimensions(height: 32, width: 32)

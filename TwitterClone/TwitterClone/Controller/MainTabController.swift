@@ -21,14 +21,14 @@ class MainTabController: UITabBarController {
         }
     }
     //This button will show up on every tabBar
-    lazy var actionButton : UIButton = {
+    private lazy var actionButton : UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
         var remoteColor: UIColor{
             if AbTest.shared.remoteConfig.configValue(forKey: "backgroundColor", source: RemoteConfigSource.remote).stringValue == "treatment"{
                 return .orange
             }else{
-                return .green
+                return .twtrBlue
             }
         }
         button.backgroundColor = remoteColor
@@ -61,7 +61,7 @@ class MainTabController: UITabBarController {
     
     //MARK: - API
     //Any controller that requires user information can be configured with that info from this mainTabBarcontroller
-    func fetchUser() {
+    private func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else{return}
         //thanks to the completion block we now have access to the user. Since its in a completion block our code doesnt get executed until our user is fetched. We stated in the completion block that we wanted User type in the completion, we have access to that user when we call this function following execution of completion
         UserService.shared.fetchUser(uid: uid) { user in
@@ -85,7 +85,7 @@ class MainTabController: UITabBarController {
         }
     }
     
-    func logUserOut() {
+    private func logUserOut() {
         do{
             try Auth.auth().signOut()
             print("Debug: Did log user out")
@@ -96,14 +96,14 @@ class MainTabController: UITabBarController {
     
     //MARK: - Helpers
     
-    func configureUI() {
+    private func configureUI() {
         view.addSubview(actionButton)
         actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 56, paddingRight: 16)
         actionButton.setDimensions(height: 56, width: 56)
         actionButton.layer.cornerRadius = 28 //divide the height or width by 2 to get circular shape
     }
 
-    func configureViewControllers() {
+    private func configureViewControllers() {
         let feedVC = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         let feedNC = templateNavigationController(image: "home_unselected", rootViewController: feedVC)
         
@@ -126,7 +126,7 @@ class MainTabController: UITabBarController {
         //tabBar.isTranslucent = false
     }
     
-    func templateNavigationController(image: String, rootViewController: UIViewController) -> UINavigationController {
+    private func templateNavigationController(image: String, rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = UIImage(named: image)
         nav.navigationBar.barTintColor = .white
@@ -135,7 +135,7 @@ class MainTabController: UITabBarController {
     
     //MARK: - Selectors
     
-    @objc func actionButtonTapped(sender: UIButton) {
+    @objc private func actionButtonTapped(sender: UIButton) {
         guard let user = user else{return}
         let nav = UINavigationController(rootViewController: UploadTweetController(user: user))
         nav.modalPresentationStyle = .fullScreen

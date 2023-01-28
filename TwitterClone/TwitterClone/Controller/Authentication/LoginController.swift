@@ -63,7 +63,7 @@ class LoginController: UIViewController{
     }
     
     //MARK: - Helpers
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .twtrBlue
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isHidden = true
@@ -85,7 +85,7 @@ class LoginController: UIViewController{
     }
     
     //MARK: - Selectors
-    @objc func handleUserLogin(sender: UIButton) {
+    @objc private func handleUserLogin(sender: UIButton) {
         guard let email = emailTextField.text else{return}
         guard let password = passwordTextField.text else{return}
         AuthService.shared.logUserIn(withEmail: email, password: password) { result, error in
@@ -102,7 +102,7 @@ class LoginController: UIViewController{
         }
     }
     
-    @objc func handleShowSignUp(sender: UIButton) {
+    @objc private func handleShowSignUp(sender: UIButton) {
         navigationController?.pushViewController(SignUpController(), animated: true)
     }
 }

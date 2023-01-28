@@ -15,6 +15,7 @@ class ProfileHeader: UICollectionReusableView {
     
     //MARK: - Properties
     weak var delegate: ProfileHeaderDelegate?
+    
     var user: User? {
         didSet {
             configure()
@@ -48,7 +49,7 @@ class ProfileHeader: UICollectionReusableView {
         return iv
     }()
     
-    private lazy var editProfileFollowButton: UIButton = {
+    lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Loading", for: .normal)
         button.layer.borderColor = UIColor.twtrBlue.cgColor
@@ -149,24 +150,24 @@ class ProfileHeader: UICollectionReusableView {
     
     
     //MARK: - Selectors
-    @objc func handleDismissal() {
+    @objc private func handleDismissal() {
         delegate?.handleDissmisal()
     }
     
-    @objc func handleEditProfileFollow() {
+    @objc private func handleEditProfileFollow() {
         delegate?.handleEditProfileFollow(self)
     }
     
-    @objc func handleFollowersTapped() {
+    @objc private func handleFollowersTapped() {
         
     }
     
-    @objc func handleFollowingTapped() {
+    @objc private func handleFollowingTapped() {
         
     }
     
     //MARK: - Helpers
-    func configure() {
+    private func configure() {
         guard let user = user else{return}
         let viewModel = ProfileHeaderViewModel(user: user)
         profileImageView.sd_setImage(with: user.profileImageUrl)

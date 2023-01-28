@@ -89,7 +89,7 @@ class SignUpController: UIViewController {
     }
     
     //MARK: - Helpers
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .twtrBlue
         
         imagePicker.delegate = self
@@ -115,10 +115,10 @@ class SignUpController: UIViewController {
     
     //MARK: - Selectors
     
-    @objc func handleAddProfilePic(sender: UIButton) {
+    @objc private func handleAddProfilePic(sender: UIButton) {
         present(imagePicker, animated: true)
     }
-    @objc func handleUserSignUp(sender: UIButton){
+    @objc private func handleUserSignUp(sender: UIButton){
         guard let profileImage = profileImage else{
             print("Please select a profile image")
             return
@@ -141,7 +141,7 @@ class SignUpController: UIViewController {
         
     }
     
-    @objc func handleGoToLogin(sender: UIButton) {
+    @objc private func handleGoToLogin(sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
 }
