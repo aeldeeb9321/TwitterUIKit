@@ -101,29 +101,29 @@ class TweetCell: UICollectionViewCell {
     }
     
     //MARK: - Selectors
-    @objc func handleCommentTapped() {
+    @objc private func handleCommentTapped() {
         
     }
     
-    @objc func handleRetweetTappped() {
+    @objc private func handleRetweetTappped() {
         
     }
     
-    @objc func handleLikeTapped() {
+    @objc private func handleLikeTapped() {
         
     }
     
-    @objc func handleShareTapped() {
+    @objc private func handleShareTapped() {
         
     }
     
-    @objc func handleProfileImageTapped() {
+    @objc private func handleProfileImageTapped() {
         delegate?.handleProfileImageTapped(self)
         
     }
     //MARK: - Helpers
     
-    func configure() {
+    private func configure() {
         guard let tweet = tweet else{return}
         let viewModel = TweetViewModel(tweet: tweet)
         captionLabel.text = tweet.caption
