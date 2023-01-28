@@ -115,7 +115,24 @@ extension UILabel {
         label.font = font
         label.textColor = textColor
         label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         return label
+    }
+    
+    func titleLabel(withText text: String? = nil) -> UILabel {
+        return uiLabel(withText: text, font: .boldSystemFont(ofSize: 22), textColor: .label)
+    }
+    
+    func headlineLabel(withText text: String? = nil) -> UILabel {
+        return uiLabel(withText: text, font: .boldSystemFont(ofSize: 20), textColor: .label)
+    }
+    
+    func makebodyLabel(withText text: String? = nil) -> UILabel {
+        return uiLabel(withText: text, font: .systemFont(ofSize: 18), textColor: .label)
+    }
+    
+    func subTextLabel(withText text: String? = nil) -> UILabel {
+        return uiLabel(withText: text, font: .systemFont(ofSize: 16), textColor: .label)
     }
 }
 
@@ -136,6 +153,17 @@ extension UIButton {
         button.tintColor = .darkGray
         button.setDimensions(height: 20, width: 20)
         button.addTarget(self, action: selector, for: .touchUpInside)
+        return button
+    }
+    
+    func makeButton(withTitle title: String? = nil, withImage image: UIImage? = nil, titleColor: UIColor? = nil, buttonColor: UIColor? =  nil, isRounded: Bool = false) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(titleColor, for: .normal)
+        button.setImage(image, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.backgroundColor = buttonColor
+        button.layer.cornerRadius =  isRounded ? 10: 0
         return button
     }
 }

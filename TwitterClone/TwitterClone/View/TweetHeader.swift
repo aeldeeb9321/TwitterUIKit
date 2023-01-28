@@ -100,8 +100,31 @@ class TweetHeader: UICollectionReusableView {
         view.addSubview(divider2)
         divider2.anchor(top: view.bottomAnchor, left: view.leftAnchor,
                         right: view.rightAnchor, paddingLeft: 8, height: 1)
-        
         return view
+    }()
+    
+    private lazy var commentButton: UIButton = {
+        let button = createButton(withImageName: "comment")
+        button.addTarget(self, action: #selector(handleCreateCommentForTweet), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var retweetButton: UIButton = {
+        let button = createButton(withImageName: "retweet")
+        button.addTarget(self, action: #selector(handleRetweetTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var likeButton: UIButton = {
+        let button = createButton(withImageName: "like")
+        button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var shareButton: UIButton = {
+        let button = createButton(withImageName: "share")
+        button.addTarget(self, action: #selector(handleShareButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     //MARK: - Init
@@ -134,8 +157,21 @@ class TweetHeader: UICollectionReusableView {
         
         addSubview(statsView)
         statsView.anchor(top: dateLabel.bottomAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, paddingTop: 16)
+        
+        let actionStack = UIStackView(arrangedSubviews: [commentButton, retweetButton, likeButton, shareButton])
+        actionStack.spacing = 72
+        actionStack.distribution = .fillEqually
+        
+        addSubview(actionStack)
+        actionStack.centerX(inView: self)
+        actionStack.anchor(bottom: safeAreaLayoutGuide.bottomAnchor, paddingBottom: 12)
     }
     
+    private func createButton(withImageName imageName: String) -> UIButton {
+        let button = UIButton().makeButton(withImage: UIImage(named: imageName)?.withTintColor(.darkGray), isRounded: false)
+        button.setDimensions(height: 20, width: 20)
+        return button
+    }
     
     //MARK: - Selectors
     @objc private func handleProfileImageTapped() {
@@ -145,5 +181,21 @@ class TweetHeader: UICollectionReusableView {
     
     @objc private func showActionSheet() {
         print("DEBUG: Handle show action sheet..")
+    }
+    
+    @objc private func handleCreateCommentForTweet() {
+        print("DEBUG: Handle add comment to tweet..")
+    }
+    
+    @objc private func handleRetweetTapped() {
+        print("DEBUG: Retweet tweet..")
+    }
+    
+    @objc private func handleLikeButtonTapped() {
+        print("DEBUG: Add like to tweet..")
+    }
+    
+    @objc private func handleShareButtonTapped() {
+        print("DEBUG: Shared tweet..")
     }
 }
