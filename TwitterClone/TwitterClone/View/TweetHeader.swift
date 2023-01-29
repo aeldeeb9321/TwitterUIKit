@@ -9,6 +9,12 @@ import UIKit
 
 class TweetHeader: UICollectionReusableView {
     //MARK: - Properties
+    var tweet: Tweet? {
+        didSet {
+            configureHeader()
+        }
+    }
+    
     private lazy var profileImageView : UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -28,14 +34,12 @@ class TweetHeader: UICollectionReusableView {
     private let fullnameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Peter Parker"
         return label
     }()
     
     private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "@ spiderman123"
         label.textColor = .lightGray
         return label
     }()
@@ -44,7 +48,6 @@ class TweetHeader: UICollectionReusableView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
         label.numberOfLines = 0
-        label.text = "Some test caption from spiderman for now.."
         return label
     }()
     
@@ -53,7 +56,6 @@ class TweetHeader: UICollectionReusableView {
         label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .left
-        label.text = "6:33 PM - 1/28/2023"
         return label
     }()
     
@@ -67,14 +69,12 @@ class TweetHeader: UICollectionReusableView {
     
     private let retweetsLabel: UILabel = {
         let label = UILabel()
-        label.text = "2 Retweets"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
     private let likesLabel: UILabel = {
         let label = UILabel()
-        label.text = "4 likes"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -138,6 +138,18 @@ class TweetHeader: UICollectionReusableView {
     }
     
     //MARK: - Helpers
+    private func configureHeader() {
+        guard let tweet = tweet else { return }
+        let viewModel = TweetViewModel(tweet: tweet)
+        captionLabel.text = tweet.caption
+        fullnameLabel.text = viewModel.fullnameText
+        usernameLabel.text = viewModel.usernameText
+        dateLabel.text = viewModel.headerTimeStamp
+        likesLabel.attributedText = viewModel.likesAttributedString
+        retweetsLabel.attributedText = viewModel.retweetsAttributedString
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+    }
+    
     private func configureReusableView() {
         let labelStack = UIStackView(arrangedSubviews: [fullnameLabel, usernameLabel])
         labelStack.axis = .vertical
