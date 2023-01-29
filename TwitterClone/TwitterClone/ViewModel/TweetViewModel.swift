@@ -68,4 +68,19 @@ struct TweetViewModel {
         return attributedTitle
     }
     
+    //We are going to be passing in some text and figuring out the size or frame of the text and then specify a width when we call this function so we can accurately determine the size of our label
+    func size(forWidth width: CGFloat) -> CGSize {
+        //measurement label
+        let measurementLabel = UILabel()
+        measurementLabel.text = tweet.caption
+        measurementLabel.numberOfLines = 0
+        //lineBreakMode is a technique to use for wrapping and truncating the label's text.
+        measurementLabel.lineBreakMode = .byWordWrapping
+        measurementLabel.translatesAutoresizingMaskIntoConstraints = false
+        measurementLabel.widthAnchor.constraint(equalToConstant: width).isActive = true
+        //returns the optimal size of the view based on its current constraints
+        let size = measurementLabel.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        return size
+    }
+    
 }

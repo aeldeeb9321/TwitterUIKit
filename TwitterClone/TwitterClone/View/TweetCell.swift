@@ -10,6 +10,7 @@ import UIKit
 //delegating action from tweetcell to controller
 protocol TweetCellDelegate: AnyObject {
     func handleProfileImageTapped(_ cell: TweetCell)
+    func handleReplyTapped(_ cell: TweetCell)
 }
 class TweetCell: UICollectionViewCell {
     //MARK: - Properties
@@ -102,7 +103,7 @@ class TweetCell: UICollectionViewCell {
     
     //MARK: - Selectors
     @objc private func handleCommentTapped() {
-        
+        delegate?.handleReplyTapped(self)
     }
     
     @objc private func handleRetweetTappped() {
