@@ -14,6 +14,10 @@ class TweetController: UICollectionViewController {
     //MARK: - Properties
     private let tweet: Tweet
     
+    private lazy var actionSheetLauncher: ActionSheetLauncher = {
+        let launcher = ActionSheetLauncher(user: tweet.user)
+        return launcher
+    }()
     
     //MARK: - Init
     init(tweet: Tweet) {
@@ -49,6 +53,7 @@ extension TweetController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: tweetHeaderId, for: indexPath) as! TweetHeader
         view.tweet = tweet
+        view.delegate = self
         return view
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -72,4 +77,13 @@ extension TweetController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 125)
     }
+}
+
+//MARK: - TweetHeaderDelegate
+extension TweetController: TweetHeaderDelegate {
+    func showActionSheet() {
+        actionSheetLauncher.show()
+    }
+    
+    
 }

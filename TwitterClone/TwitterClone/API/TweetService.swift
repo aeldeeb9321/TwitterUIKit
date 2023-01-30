@@ -12,19 +12,26 @@ import FirebaseDatabase
 struct TweetService {
     static let shared = TweetService()
     
-    func uploadTweet(caption: String, completion: @escaping(Error?, DatabaseReference) -> Void) {
+    func uploadTweet(caption: String, type: UploadTweetConfiguration,completion: @escaping(Error?, DatabaseReference) -> Void) {
         //We need the uid since we need to know who made a tweet
         guard let uid = Auth.auth().currentUser?.uid else{return}
         //values that we will upload to our database
         let values = ["uid": uid, "timestamp": Int(NSDate().timeIntervalSince1970), "likes": 0, "retweets": 0, "caption": caption] as [String : Any]
-        //ref references the tweet structure in our database
-        let ref = REF_TWEETS.childByAutoId() //we stored this property in ref so we can get access to the key that it creates
-        //automatically generates uid and then uploads all information
-        ref.updateChildValues(values) { error, ref in
-            //update our user-tweet structure after tweet upload completes
-            guard let tweetID = ref.key else{return}
-            REF_USER_TWEETS.child(uid).updateChildValues([tweetID: 1], withCompletionBlock: completion)
+        
+        switch type {
+        case .tweet:
+            //ref references the tweet structure in our database
+            //automatically generates uid and then uploads all information
+            REF_TWEETS.childByAutoId().updateChildValues(values) { error, ref in
+                //update our user-tweet structure after tweet upload completes
+                guard let tweetID = ref.key else{return}
+                REF_USER_TWEETS.child(uid).updateChildValues([tweetID: 1], withCompletionBlock: completion)
+            }
+        case .reply(let tweet):
+            REF_TWEET_REPLIES.child(tweet.tweetID).childByAutoId()
+                .updateChildValues(values, withCompletionBlock: completion)
         }
+        
     }
     //fetching the tweets from our database, used the info we got back from the database to construct our custom tweet object by passing in the tweetid and dictionary. Within that dictionary we look for the values we need to populate the properties in our Tweet structure.
     func fetchTweets(completion: @escaping([Tweet]) -> Void) {

@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol TweetHeaderDelegate: AnyObject {
+    func showActionSheet()
+}
+
 class TweetHeader: UICollectionReusableView {
     //MARK: - Properties
+    weak var delegate: TweetHeaderDelegate?
+    
     var tweet: Tweet? {
         didSet {
             configureHeader()
@@ -177,6 +183,10 @@ class TweetHeader: UICollectionReusableView {
         addSubview(actionStack)
         actionStack.centerX(inView: self)
         actionStack.anchor(bottom: safeAreaLayoutGuide.bottomAnchor, paddingBottom: 12)
+        
+        addSubview(optionsButton)
+        optionsButton.centerY(inView: userStack)
+        optionsButton.anchor(right: safeAreaLayoutGuide.rightAnchor, paddingRight: 12)
     }
     
     private func createButton(withImageName imageName: String) -> UIButton {
@@ -193,6 +203,7 @@ class TweetHeader: UICollectionReusableView {
     
     @objc private func showActionSheet() {
         print("DEBUG: Handle show action sheet..")
+        delegate?.showActionSheet()
     }
     
     @objc private func handleCreateCommentForTweet() {
