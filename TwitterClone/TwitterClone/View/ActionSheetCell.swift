@@ -8,6 +8,7 @@
 import UIKit
 
 class ActionSheetCell: UITableViewCell {
+    
     //MARK: - Properties
     
     var option: ActionSheetOptions? {
@@ -32,6 +33,7 @@ class ActionSheetCell: UITableViewCell {
     }()
     
     //MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureCellComponents()
@@ -42,6 +44,7 @@ class ActionSheetCell: UITableViewCell {
     }
     
     //MARK: - Helpers
+    
     private func configureCellComponents() {
         addSubview(optionImageView)
         optionImageView.centerY(inView: self)

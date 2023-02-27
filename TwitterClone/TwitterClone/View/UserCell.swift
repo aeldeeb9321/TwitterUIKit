@@ -8,6 +8,7 @@
 import UIKit
 
 class UserCell: UITableViewCell {
+    
     //MARK: - Properties
     
     var user: User? {
@@ -39,7 +40,9 @@ class UserCell: UITableViewCell {
         label.text = "Fullname"
         return label
     }()
+    
     //MARK: - LifeCycle
+    
     //how you initialize a uitableviewcell programmatically
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

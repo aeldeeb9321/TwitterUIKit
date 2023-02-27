@@ -9,9 +9,15 @@ import UIKit
 
 private let actionReuseId = "actionTvReuseId"
 
+protocol ActionSheetLauncherDelegate: AnyObject {
+    func didSelect(option: ActionSheetOptions)
+}
+
 class ActionSheetLauncher: NSObject {
     //MARK: - Propreties
     private let user: User
+    
+    weak var delegate: ActionSheetLauncherDelegate?
     
     //we are going to be accessing the window of this application in order to show the UITableView
     private var window: UIWindow?
@@ -29,6 +35,8 @@ class ActionSheetLauncher: NSObject {
         tv.isScrollEnabled = false
         return tv
     }()
+    
+    private var tableViewHeight: CGFloat?
     
     private lazy var dimmedView: UIView = {
         let view = UIView()
@@ -62,6 +70,13 @@ class ActionSheetLauncher: NSObject {
     
     //MARK: - Helpers
     
+    private func showtableView(_ shouldShow: Bool) {
+        guard let window = window else { return }
+        guard let height = tableViewHeight else { return }
+        let y = shouldShow ? window.frame.height - height : window.frame.height
+        tableView.frame.origin.y = y
+    }
+    
     func show() {
         print("DEBUG: Show action sheet for user \(user.username)")
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
@@ -72,11 +87,12 @@ class ActionSheetLauncher: NSObject {
         
         window.addSubview(tableView)
         let height = CGFloat(viewModel.options.count * 60) + 100
+        self.tableViewHeight = height
         tableView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
         
         UIView.animate(withDuration: 0.5, delay: 0) {
             self.dimmedView.alpha = 1
-            self.tableView.frame.origin.y -= height
+            self.showtableView(true)
         }
     }
     
@@ -115,7 +131,13 @@ extension ActionSheetLauncher: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let option = viewModel.options[indexPath.row]
-        print("DEBUG: Selected option is \(option.description)")
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.dimmedView.alpha = 0
+            self.showtableView(false)
+        } completion: { _ in
+            self.delegate?.didSelect(option: option)
+        }
+
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

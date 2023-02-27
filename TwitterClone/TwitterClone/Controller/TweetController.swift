@@ -11,12 +11,15 @@ private let tweetReuseId = "tweetControllerId"
 private let tweetHeaderId = "tweetHeaderId"
 
 class TweetController: UICollectionViewController {
+    
     //MARK: - Properties
+    
     private var tweet: Tweet
     
     private var actionSheetLauncher: ActionSheetLauncher?
     
     //MARK: - Init
+    
     init(tweet: Tweet) {
         self.tweet = tweet
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -27,6 +30,7 @@ class TweetController: UICollectionViewController {
     }
     
     //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -35,10 +39,17 @@ class TweetController: UICollectionViewController {
     
     
     //MARK: - Helpers
+    
     private func configureCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: tweetReuseId)
         collectionView.register(TweetHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: tweetHeaderId)
+    }
+    
+    private func showActionSheet(forUser user: User) {
+        actionSheetLauncher = ActionSheetLauncher(user: user)
+        actionSheetLauncher?.delegate = self
+        self.actionSheetLauncher?.show()
     }
     
     //MARK: - Selectors
@@ -46,6 +57,7 @@ class TweetController: UICollectionViewController {
 }
 
 //MARK: - CollectionView DataSource/Delegate Methods
+
 extension TweetController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: tweetHeaderId, for: indexPath) as! TweetHeader
@@ -64,6 +76,7 @@ extension TweetController {
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
+
 extension TweetController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let viewModel = TweetViewModel(tweet: tweet)
@@ -77,22 +90,28 @@ extension TweetController: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: - TweetHeaderDelegate
+
 extension TweetController: TweetHeaderDelegate {
     func showActionSheet() {
         if tweet.user.isCurrentUser {
-            actionSheetLauncher = ActionSheetLauncher(user: tweet.user)
-            self.actionSheetLauncher?.show()
+            showActionSheet(forUser: tweet.user)
         } else {
             UserService.shared.checkIfUserIsFollowed(uid: tweet.user.uid) { isFollowed in
                 var user = self.tweet.user
                 user.isFollowed = isFollowed
-                self.actionSheetLauncher = ActionSheetLauncher(user: user)
-                self.actionSheetLauncher?.show()
+                self.showActionSheet(forUser: user)
             }
         }
-        
-        
+    }
+}
+
+//MARK: - ActionSheetLauncherDelegate
+
+extension TweetController: ActionSheetLauncherDelegate {
+    func didSelect(option: ActionSheetOptions) {
+        print("DEBUG: Option in controller is \(option.description)")
     }
     
     
 }
+

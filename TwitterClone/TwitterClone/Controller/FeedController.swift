@@ -10,6 +10,7 @@ import SDWebImage
 
 private let reuseIdentifier = "TweetCell"
 class FeedController: UICollectionViewController {
+    
     //MARK: - Properties
     
     var user: User? {
@@ -24,7 +25,9 @@ class FeedController: UICollectionViewController {
             collectionView.reloadData()
         }
     }
+    
     //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -36,6 +39,7 @@ class FeedController: UICollectionViewController {
         navigationController?.navigationBar.barStyle = .default
         navigationController?.navigationBar.isHidden = false
     }
+    
     //MARK: - API
     
     private func fetchTweets() {
@@ -48,6 +52,7 @@ class FeedController: UICollectionViewController {
     }
     
     //MARK: - Helpers
+    
     private func configureUI() {
         view.backgroundColor = .white
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -71,6 +76,7 @@ class FeedController: UICollectionViewController {
 }
 
 //MARK: - UICollectionViewDelegate/DataSource
+
 extension FeedController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tweets.count
@@ -92,6 +98,7 @@ extension FeedController {
     
 }
 //MARK: - UICollectionViewDelegateFlowLayout
+
 extension FeedController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let tweet = tweets[indexPath.item]
@@ -102,6 +109,7 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: - TweetCellDelegate
+
 extension FeedController: TweetCellDelegate {
     func handleReplyTapped(_ cell: TweetCell) {
         guard let tweet = cell.tweet else { return }

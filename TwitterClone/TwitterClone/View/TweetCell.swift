@@ -13,6 +13,7 @@ protocol TweetCellDelegate: AnyObject {
     func handleReplyTapped(_ cell: TweetCell)
 }
 class TweetCell: UICollectionViewCell {
+    
     //MARK: - Properties
     
     var tweet: Tweet? {
@@ -69,6 +70,7 @@ class TweetCell: UICollectionViewCell {
     private let infoLabel = UILabel()
     
     //MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -102,6 +104,7 @@ class TweetCell: UICollectionViewCell {
     }
     
     //MARK: - Selectors
+    
     @objc private func handleCommentTapped() {
         delegate?.handleReplyTapped(self)
     }
@@ -122,6 +125,7 @@ class TweetCell: UICollectionViewCell {
         delegate?.handleProfileImageTapped(self)
         
     }
+    
     //MARK: - Helpers
     
     private func configure() {

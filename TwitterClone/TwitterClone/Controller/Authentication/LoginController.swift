@@ -8,6 +8,7 @@
 import UIKit
 
 class LoginController: UIViewController{
+    
     //MARK: - Properties
     
     private let logoImageView: UIImageView = {
@@ -57,12 +58,14 @@ class LoginController: UIViewController{
     }()
 
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
     //MARK: - Helpers
+    
     private func configureUI() {
         view.backgroundColor = .twtrBlue
         navigationController?.navigationBar.barStyle = .black
@@ -85,6 +88,7 @@ class LoginController: UIViewController{
     }
     
     //MARK: - Selectors
+    
     @objc private func handleUserLogin(sender: UIButton) {
         guard let email = emailTextField.text else{return}
         guard let password = passwordTextField.text else{return}
@@ -108,6 +112,7 @@ class LoginController: UIViewController{
 }
 
 //MARK: - UITextFieldDelegate
+
 extension LoginController: UITextFieldDelegate {
     
 }

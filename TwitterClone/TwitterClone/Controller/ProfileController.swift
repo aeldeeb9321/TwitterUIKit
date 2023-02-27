@@ -12,6 +12,7 @@ private let headerIdentifier = "ProfileHeader"
 class ProfileController: UICollectionViewController {
     
     //MARK: - Properties
+    
     //our profile is associated with a user
     private var user: User {
         didSet {
@@ -25,6 +26,7 @@ class ProfileController: UICollectionViewController {
         }
     }
     //MARK: - LifeCycle
+    
     init(user: User) {
         self.user = user
         //Since its a collection viewController we have to call super.init
@@ -51,6 +53,7 @@ class ProfileController: UICollectionViewController {
     }
     
     //MARK: - API
+    
     private func fetchTweets() {
         TweetService.shared.fetchTweets(forUser: user) { tweets in
             self.tweets = tweets
@@ -81,11 +84,13 @@ class ProfileController: UICollectionViewController {
         //registering header
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
     }
+    
     //MARK: - Selectors
     
 }
 
 //MARK: - UICollectionViewDataSource
+
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tweets.count
@@ -108,6 +113,7 @@ extension ProfileController {
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
+
 extension ProfileController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 350)

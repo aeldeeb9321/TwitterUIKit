@@ -8,7 +8,9 @@
 import UIKit
 
 class CaptionTextView: UITextView {
+    
     //MARK: - Properties
+    
     let placeHolderLabel: UILabel = {
         let label = UILabel()
         label.textColor = .darkGray
@@ -19,6 +21,7 @@ class CaptionTextView: UITextView {
     }()
     
     //MARK: - Lifecycle
+    
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         backgroundColor = .white

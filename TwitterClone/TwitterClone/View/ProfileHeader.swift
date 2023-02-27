@@ -14,6 +14,7 @@ protocol ProfileHeaderDelegate: AnyObject {
 class ProfileHeader: UICollectionReusableView {
     
     //MARK: - Properties
+    
     weak var delegate: ProfileHeaderDelegate?
     
     var user: User? {
@@ -23,6 +24,7 @@ class ProfileHeader: UICollectionReusableView {
     }
     
     private let filterBar = ProfileFilterView()
+    
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "baseline_arrow_back_white_24dp")?.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -104,6 +106,7 @@ class ProfileHeader: UICollectionReusableView {
         //added the gesture recognizer so we can so the user is followering when tapped
         return label
     }()
+    
     //MARK: - Lifecycle
     
     override init(frame: CGRect) {
@@ -148,8 +151,8 @@ class ProfileHeader: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     //MARK: - Selectors
+    
     @objc private func handleDismissal() {
         delegate?.handleDissmisal()
     }
@@ -167,6 +170,7 @@ class ProfileHeader: UICollectionReusableView {
     }
     
     //MARK: - Helpers
+    
     private func configure() {
         guard let user = user else{return}
         let viewModel = ProfileHeaderViewModel(user: user)
@@ -179,7 +183,9 @@ class ProfileHeader: UICollectionReusableView {
         usernameLabel.text = viewModel.usernameText
     }
 }
+
 //MARK: - ProfileFilterViewDelegate
+
 extension ProfileHeader: ProfileFilterViewDelegate {
     func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
         //getting the cell for the corresponding indexPath

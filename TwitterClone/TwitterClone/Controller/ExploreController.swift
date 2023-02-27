@@ -8,7 +8,9 @@
 import UIKit
 private let reuseIdentifier = "reuseIdentifier"
 class ExploreController: UITableViewController {
+    
     //MARK: - Properties
+    
     private var users = [User]() {
         didSet {
             tableView.reloadData()
@@ -28,6 +30,7 @@ class ExploreController: UITableViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     
     //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -42,12 +45,15 @@ class ExploreController: UITableViewController {
     }
     
     //MARK: - API
+    
     private func fetchUsers() {
         UserService.shared.fetchUsers { users in
             self.users = users
         }
     }
+    
     //MARK: - Helpers
+    
     private func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "Explore"
@@ -66,6 +72,8 @@ class ExploreController: UITableViewController {
         definesPresentationContext = false
     }
 }
+
+//MARK: - TableView DataSource/Delegate Methods
 
 extension ExploreController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

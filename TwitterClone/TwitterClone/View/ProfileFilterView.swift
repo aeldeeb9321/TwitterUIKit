@@ -14,6 +14,7 @@ protocol ProfileFilterViewDelegate: AnyObject {
 class ProfileFilterView: UIView {
     
     //MARK: - Properties
+    
     weak var delegate: ProfileFilterViewDelegate?
     
     //This collectionView we are using within this view
@@ -28,6 +29,7 @@ class ProfileFilterView: UIView {
     }()
     
     //MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         let selectedIndexPath = IndexPath(row: 0, section: 0)
@@ -44,7 +46,9 @@ class ProfileFilterView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 //MARK: - UICollectionViewDataSource
+
 extension ProfileFilterView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileFilterCell
@@ -59,7 +63,9 @@ extension ProfileFilterView: UICollectionViewDataSource {
     }
     
 }
+
 //MARK: - UICollectionViewDelegateFlowLayout (gets called everytime you select an item)
+
 extension ProfileFilterView: UICollectionViewDelegateFlowLayout {
     //setting up the size of the cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

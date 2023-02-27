@@ -12,7 +12,9 @@ protocol TweetHeaderDelegate: AnyObject {
 }
 
 class TweetHeader: UICollectionReusableView {
+    
     //MARK: - Properties
+    
     weak var delegate: TweetHeaderDelegate?
     
     var tweet: Tweet? {
@@ -134,6 +136,7 @@ class TweetHeader: UICollectionReusableView {
     }()
     
     //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureReusableView()
@@ -144,6 +147,7 @@ class TweetHeader: UICollectionReusableView {
     }
     
     //MARK: - Helpers
+    
     private func configureHeader() {
         guard let tweet = tweet else { return }
         let viewModel = TweetViewModel(tweet: tweet)
@@ -196,6 +200,7 @@ class TweetHeader: UICollectionReusableView {
     }
     
     //MARK: - Selectors
+    
     @objc private func handleProfileImageTapped() {
         //handle profile image tapped delegate method
         print("DEBUG: Go to user profile..")

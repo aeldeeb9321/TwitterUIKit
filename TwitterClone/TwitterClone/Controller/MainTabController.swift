@@ -10,6 +10,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseRemoteConfigSwift
 class MainTabController: UITabBarController {
+    
     //MARK: - Properties
     
     var user: User? {
@@ -36,7 +37,9 @@ class MainTabController: UITabBarController {
         button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         return button
     }()
+    
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .twtrBlue
@@ -60,6 +63,7 @@ class MainTabController: UITabBarController {
     }
     
     //MARK: - API
+    
     //Any controller that requires user information can be configured with that info from this mainTabBarcontroller
     private func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else{return}

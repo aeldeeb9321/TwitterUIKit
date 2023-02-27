@@ -9,7 +9,9 @@ import UIKit
 
 
 class UploadTweetController: UIViewController{
+    
     //MARK: - Properties
+    
     private let user: User
     private let config: UploadTweetConfiguration
     private lazy var viewModel = UploadTweetViewModel(config: config)
@@ -47,6 +49,7 @@ class UploadTweetController: UIViewController{
     private let captionTextView = CaptionTextView()
     
     //MARK: - Lifecycle
+    
     //we are initializing user and it is being passed in from our main tab controller, that way we can load the user image without having to do an unnecessary api call. We know this controller needs info on the user which is why we initialized it.
     init(user: User, config: UploadTweetConfiguration) {
         self.user = user
@@ -63,6 +66,7 @@ class UploadTweetController: UIViewController{
     }
     
     //MARK: - Selectors
+    
     @objc private func handleCancel() {
         dismiss(animated: true)
     }
@@ -77,9 +81,11 @@ class UploadTweetController: UIViewController{
             self.dismiss(animated: true)
         }
     }
+    
     //MARK: - API
     
     //MARK: - Helpers
+    
     private func configureUI() {
         view.backgroundColor = .white
         configureNavBar()

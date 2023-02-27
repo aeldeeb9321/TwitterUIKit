@@ -12,6 +12,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class SignUpController: UIViewController {
+    
     //MARK: - Properties
     
     private let imagePicker = UIImagePickerController()
@@ -83,12 +84,14 @@ class SignUpController: UIViewController {
     }()
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
     //MARK: - Helpers
+    
     private func configureUI() {
         view.backgroundColor = .twtrBlue
         
@@ -165,6 +168,7 @@ extension SignUpController: UIImagePickerControllerDelegate, UINavigationControl
 }
 
 //MARK: - UITextFieldDelegate
+
 extension SignUpController: UITextFieldDelegate {
     
 }
