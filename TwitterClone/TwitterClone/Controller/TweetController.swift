@@ -12,12 +12,9 @@ private let tweetHeaderId = "tweetHeaderId"
 
 class TweetController: UICollectionViewController {
     //MARK: - Properties
-    private let tweet: Tweet
+    private var tweet: Tweet
     
-    private lazy var actionSheetLauncher: ActionSheetLauncher = {
-        let launcher = ActionSheetLauncher(user: tweet.user)
-        return launcher
-    }()
+    private var actionSheetLauncher: ActionSheetLauncher?
     
     //MARK: - Init
     init(tweet: Tweet) {
@@ -82,7 +79,19 @@ extension TweetController: UICollectionViewDelegateFlowLayout {
 //MARK: - TweetHeaderDelegate
 extension TweetController: TweetHeaderDelegate {
     func showActionSheet() {
-        actionSheetLauncher.show()
+        if tweet.user.isCurrentUser {
+            actionSheetLauncher = ActionSheetLauncher(user: tweet.user)
+            self.actionSheetLauncher?.show()
+        } else {
+            UserService.shared.checkIfUserIsFollowed(uid: tweet.user.uid) { isFollowed in
+                var user = self.tweet.user
+                user.isFollowed = isFollowed
+                self.actionSheetLauncher = ActionSheetLauncher(user: user)
+                self.actionSheetLauncher?.show()
+            }
+        }
+        
+        
     }
     
     

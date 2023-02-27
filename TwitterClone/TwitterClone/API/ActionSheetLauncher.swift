@@ -61,6 +61,7 @@ class ActionSheetLauncher: NSObject {
     }
     
     //MARK: - Helpers
+    
     func show() {
         print("DEBUG: Show action sheet for user \(user.username)")
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
@@ -80,6 +81,7 @@ class ActionSheetLauncher: NSObject {
     }
     
     //MARK: - Selectors
+    
     @objc private func handleDismissal() {
         UIView.animate(withDuration: 0.5, delay: 0) {
             self.dimmedView.alpha = 0
@@ -90,6 +92,7 @@ class ActionSheetLauncher: NSObject {
 }
 
 //MARK: - UITableViewDataSource
+
 extension ActionSheetLauncher: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: actionReuseId, for: indexPath) as! ActionSheetCell
@@ -107,9 +110,12 @@ extension ActionSheetLauncher: UITableViewDataSource {
 }
 
 //MARK: - UITableViewDelegate
+
 extension ActionSheetLauncher: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let option = viewModel.options[indexPath.row]
+        print("DEBUG: Selected option is \(option.description)")
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
