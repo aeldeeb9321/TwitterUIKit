@@ -9,6 +9,14 @@ import UIKit
 
 class ActionSheetCell: UITableViewCell {
     //MARK: - Properties
+    
+    var option: ActionSheetOptions? {
+        didSet {
+            guard let option = option else { return }
+            titleLabel.text = option.description
+        }
+    }
+    
     private let optionImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -19,7 +27,7 @@ class ActionSheetCell: UITableViewCell {
     }()
     
     private let titleLabel: UILabel = {
-        let label = UILabel().makebodyLabel(withText: "Test Option")
+        let label = UILabel().makebodyLabel()
         return label
     }()
     
