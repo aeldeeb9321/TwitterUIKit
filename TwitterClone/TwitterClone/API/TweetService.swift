@@ -33,7 +33,7 @@ struct TweetService {
         }
         
     }
-    //fetching the tweets from our database, used the info we got back from the database to construct our custom tweet object by passing in the tweetid and dictionary. Within that dictionary we look for the values we need to populate the properties in our Tweet structure.
+    // Fetching the tweets from our database, used the info we got back from the database to construct our custom tweet object by passing in the tweetid and dictionary. Within that dictionary we look for the values we need to populate the properties in our Tweet structure.
     func fetchTweets(completion: @escaping([Tweet]) -> Void) {
         var tweets = [Tweet]()
         //.childAdded is a dataEventType which monitors for when a new child is added to a location. It has a looping functionality where it iterates through each one of the elements of a structure in the database and gives us back the information about that
@@ -69,6 +69,23 @@ struct TweetService {
                     completion(tweets)
                 }
             }
+        }
+    }
+    
+    func likeTweet(tweet: Tweet, completion: @escaping(DatabaseCompletion)) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let likes = tweet.didLike ? tweet.likes - 1 : tweet.likes + 1
+        
+        // Going to the ref tweets structure, finding the tweetId, going to the likes child and setting the value.
+        REF_TWEETS.child(tweet.tweetID).child("likes").setValue(likes)
+        
+        if tweet.didLike {
+            // remove like data from firebase
+            REF_USER_LIKES.child(uid).updateChildValues([uid: 0], withCompletionBlock: completion)
+        } else {
+            // add like data to firebase
+            REF_USER_LIKES.child(uid).updateChildValues([uid: 1], withCompletionBlock: completion)
         }
     }
 }

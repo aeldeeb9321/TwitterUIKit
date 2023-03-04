@@ -115,7 +115,7 @@ class TweetCell: UICollectionViewCell {
     }
     
     @objc private func handleLikeTapped() {
-        delegate?.handleLikeTapped(_cell: self)
+        delegate?.handleLikeTapped(self)
     }
     
     @objc private func handleShareTapped() {
